@@ -24,7 +24,6 @@ public class App extends Application {
 
         stage.setScene(new Scene(mainScene.getParent()));
         stage.show();
-
     }
 
     public static void main(String[] args) {

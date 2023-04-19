@@ -18,8 +18,7 @@ public abstract class AbstractVisualComponent {
     }
 
     protected synchronized Parent getFxmlRoot() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        return loader.load();
+        return new FXMLLoader(getClass().getResource(fxmlPath)).load();
     }
 
     @FXML

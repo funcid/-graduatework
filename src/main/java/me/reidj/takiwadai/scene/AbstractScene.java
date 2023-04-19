@@ -1,6 +1,7 @@
 package me.reidj.takiwadai.scene;
 
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -29,6 +30,10 @@ public abstract class AbstractScene extends AbstractVisualComponent {
 
     public String getFxmlPath() {
         return fxmlPath;
+    }
+
+    public Scene getScene() {
+        return getStage().getScene();
     }
 
     public Parent getParent() throws IOException {
