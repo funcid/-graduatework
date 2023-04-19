@@ -30,6 +30,13 @@ public abstract class AbstractVisualComponent {
         alert.show();
     }
 
+    public void fineAlert(String contextText, String headerText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, contextText);
+        alert.setTitle("Успешно!");
+        alert.setHeaderText(headerText);
+        alert.show();
+    }
+
     @FXML
     void exit() {
         System.exit(0);

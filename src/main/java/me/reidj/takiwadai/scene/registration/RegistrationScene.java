@@ -12,10 +12,13 @@ import me.reidj.takiwadai.user.RoleType;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
-import static me.reidj.takiwadai.util.StringUtil.isOnlyRussianSymbols;
+import static me.reidj.takiwadai.exception.ExceptionType.*;
 
 public class RegistrationScene extends AbstractScene {
 
@@ -37,6 +40,8 @@ public class RegistrationScene extends AbstractScene {
     @FXML
     private TextField surname;
 
+    private Timer timer;
+
     public RegistrationScene() {
 
     }
@@ -53,39 +58,79 @@ public class RegistrationScene extends AbstractScene {
 
     @FXML
     void processRegistration() {
-        String surnameText = surname.getText();
-        String nameText = surname.getText();
-        String secondNameText = surname.getText();
-        if (surnameText.isEmpty() || password.getText().isEmpty() || nameText.isEmpty()
-                || email.getText().isEmpty() || confirmPassword.getText().isEmpty() || secondNameText.isEmpty()) {
-            errorAlert("Пожалуйста, заполните все поля", "Поля не могут быть пустыми!");
+        if (errorCheck(surname.getText(), name.getText(), secondName.getText(), email.getText(), password.getText(), confirmPassword.getText())) {
             return;
         }
-        if (isOnlyRussianSymbols(surnameText) || isOnlyRussianSymbols(nameText) || isOnlyRussianSymbols(secondNameText)) {
-            errorAlert(
-                    "Пожалуйста, проверьте правильность введённых данных",
-                    "Имя, фамилия и отчество могут содержать только русские символы!"
-            );
-            return;
-        }
-        // TODO Добавить проверку на правильность введёной почты, пароля и дубликата пользователя
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(DbUtil.CREATE_USER);
-            statement.setString(1, UUID.randomUUID().toString());
-            statement.setString(2, name.getText());
-            statement.setString(3, surname.getText());
-            statement.setString(4, secondName.getText());
-            statement.setString(5, email.getText());
-            statement.setString(6, password.getText());
-            statement.setString(7, RoleType.USER.name());
-            statement.execute();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(DbUtil.DUPLICATE_USER + "'" + email.getText() + "'");
+
+            int resultCount = 0;
+            while (resultSet.next()) {
+                resultCount = resultSet.getInt(1);
+                if (resultCount > 0) {
+                    errorAlert("Пользователь с таким электронным адресом уже существует!", "");
+                    break;
+                }
+            }
+
+            if (resultCount == 0) {
+                PreparedStatement prepareStatement = connection.prepareStatement(DbUtil.CREATE_USER);
+                prepareStatement.setString(1, UUID.randomUUID().toString());
+                prepareStatement.setString(2, name.getText());
+                prepareStatement.setString(3, surname.getText());
+                prepareStatement.setString(4, secondName.getText());
+                prepareStatement.setString(5, email.getText());
+                prepareStatement.setString(6, password.getText());
+                prepareStatement.setString(7, RoleType.USER.name());
+                prepareStatement.execute();
+                fineAlert("Через 3 секунды Вы будете автоматически перенаправлены на страницу авторизации.", "Регистрация прошла успешно!");
+                timer = new Timer();
+                timer.schedule(new RedirectTask(), 3000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private boolean errorCheck(String surnameText, String nameText, String secondNameText, String emailText, String passwordText, String passwordConfirmText) {
+        if (FIELD_IS_EMPTY.getPredicate().test(new String[]{
+                secondNameText, passwordText, nameText, emailText, passwordConfirmText, secondNameText
+        })) {
+            errorAlert(FIELD_IS_EMPTY.getContextText(), FIELD_IS_EMPTY.getHeaderText());
+            return true;
+        } else if (SYMBOL_IS_INCORRECT.getPredicate().test(new String[]{
+                surnameText, nameText, secondNameText
+        })) {
+            errorAlert(SYMBOL_IS_INCORRECT.getContextText(), SYMBOL_IS_INCORRECT.getHeaderText());
+            return true;
+        } else if (EMAIL_IS_INCORRECT.getPredicate().test(new String[]{emailText})) {
+            errorAlert(EMAIL_IS_INCORRECT.getContextText(), EMAIL_IS_INCORRECT.getHeaderText());
+            return true;
+        } else if (PASSWORD_IS_NOT_EQUAL.getPredicate().test(new String[]{passwordText, passwordConfirmText})) {
+            errorAlert(PASSWORD_IS_NOT_EQUAL.getContextText(), PASSWORD_IS_NOT_EQUAL.getHeaderText());
+            return true;
+        } else if (PASSWORD_SHORT.getPredicate().test(new String[]{passwordText})) {
+            errorAlert(PASSWORD_SHORT.getContextText(), PASSWORD_SHORT.getHeaderText());
+            return true;
+        }
+        return false;
+    }
+
     @FXML
     void move() throws IOException {
         App.getApp().getMainScene().getScene().setRoot(App.getApp().getMainScene().getParent());
+    }
+
+    class RedirectTask extends TimerTask {
+        @Override
+        public void run() {
+            try {
+                move();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            timer.cancel();
+        }
     }
 }
