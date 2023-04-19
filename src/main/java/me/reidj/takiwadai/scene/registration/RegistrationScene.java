@@ -15,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.UUID;
 
+import static me.reidj.takiwadai.util.StringUtil.isOnlyRussianSymbols;
+
 public class RegistrationScene extends AbstractScene {
 
     @FXML
@@ -51,11 +53,22 @@ public class RegistrationScene extends AbstractScene {
 
     @FXML
     void processRegistration() {
-        if (surname.getText().isEmpty() || password.getText().isEmpty() || name.getText().isEmpty()
-                || email.getText().isEmpty() || confirmPassword.getText().isEmpty() || secondName.getText().isEmpty()) {
+        String surnameText = surname.getText();
+        String nameText = surname.getText();
+        String secondNameText = surname.getText();
+        if (surnameText.isEmpty() || password.getText().isEmpty() || nameText.isEmpty()
+                || email.getText().isEmpty() || confirmPassword.getText().isEmpty() || secondNameText.isEmpty()) {
             errorAlert("Пожалуйста, заполните все поля", "Поля не могут быть пустыми!");
             return;
         }
+        if (isOnlyRussianSymbols(surnameText) || isOnlyRussianSymbols(nameText) || isOnlyRussianSymbols(secondNameText)) {
+            errorAlert(
+                    "Пожалуйста, проверьте правильность введённых данных",
+                    "Имя, фамилия и отчество могут содержать только русские символы!"
+            );
+            return;
+        }
+        // TODO Добавить проверку на правильность введёной почты, пароля и дубликата пользователя
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(DbUtil.CREATE_USER);
             statement.setString(1, UUID.randomUUID().toString());
