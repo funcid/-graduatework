@@ -94,6 +94,7 @@ public class RegistrationScene extends AbstractScene {
     }
 
     private boolean errorCheck(String surnameText, String nameText, String secondNameText, String emailText, String passwordText, String passwordConfirmText) {
+        // TODO peace of shit
         if (FIELD_IS_EMPTY.getPredicate().test(new String[]{
                 secondNameText, passwordText, nameText, emailText, passwordConfirmText, secondNameText
         })) {
