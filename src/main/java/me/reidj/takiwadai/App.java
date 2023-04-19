@@ -13,6 +13,7 @@ public class App extends Application {
     private static App app;
 
     private MainScene mainScene;
+
     private RegistrationScene registrationScene;
 
     @Override
@@ -30,15 +31,15 @@ public class App extends Application {
         launch();
     }
 
-    public RegistrationScene getRegistrationScene() {
-        return registrationScene;
-    }
-
     public static App getApp() {
         return app;
     }
 
     public MainScene getMainScene() {
         return mainScene;
+    }
+
+    public RegistrationScene getRegistrationScene() {
+        return registrationScene;
     }
 }

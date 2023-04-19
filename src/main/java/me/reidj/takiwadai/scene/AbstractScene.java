@@ -10,6 +10,7 @@ import java.io.IOException;
 public abstract class AbstractScene extends AbstractVisualComponent {
 
     private String fxmlPath;
+
     private Stage stage;
 
     public AbstractScene(String fxmlPath, Stage stage) {
@@ -22,14 +23,23 @@ public abstract class AbstractScene extends AbstractVisualComponent {
     }
 
     public AbstractScene() {
-    }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public String getFxmlPath() {
         return fxmlPath;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setFxmlPath(String fxmlPath) {
+        this.fxmlPath = fxmlPath;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public Scene getScene() {
@@ -38,9 +48,5 @@ public abstract class AbstractScene extends AbstractVisualComponent {
 
     public Parent getParent() throws IOException {
         return getFxmlRoot();
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 }

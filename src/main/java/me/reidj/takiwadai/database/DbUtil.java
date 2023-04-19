@@ -7,10 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOError;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbUtil {
+
+    public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (uuid TEXT, name TEXT, surname TEXT, secondName TEXT, email TEXT, password TEXT, roleType TEXT);";
+    public static final String CREATE_USER = "INSERT INTO users (uuid, name, surname, secondName, email, password, roleType) VALUES(?, ?, ?, ?, ?, ?, ?);";
 
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";
@@ -31,11 +33,10 @@ public class DbUtil {
             dataSource.setUsername(properties.getProperty(DB_USERNAME));
             dataSource.setPassword(properties.getProperty(DB_PASSWORD));
 
-            dataSource.setMinimumIdle(100);
-            dataSource.setMaximumPoolSize(2000);
-            dataSource.setAutoCommit(false);
-            dataSource.setLoginTimeout(3);
-        } catch (IOError | FileNotFoundException | SQLException e) {
+            dataSource.setIdleTimeout(600000);
+            dataSource.setMaximumPoolSize(250);
+            dataSource.setMinimumIdle(3);
+        } catch (IOError | FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -14,18 +14,19 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" styleClass="full-logo" />
       <Label layoutX="46.0" layoutY="103.0" styleClass="application-name" text="Регистрация" textFill="#545454" />
       <Label layoutX="46.0" layoutY="134.0" styleClass="welcome" text="Заполните форму для регистрации" textFill="#a3a3a3" />
-      <PasswordField layoutX="50.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите электронный адрес" />
       <TextField fx:id="name" layoutX="50.0" layoutY="186.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите Имя" styleClass="text-field" />
-      <TextField layoutX="50.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите Фамилию" styleClass="text-field" />
-      <PasswordField layoutX="50.0" layoutY="358.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите пароль" />
-      <PasswordField layoutX="50.0" layoutY="415.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Подтвердите пароль" />
-      <Button layoutX="50.0" layoutY="471.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#processRegistration" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Зарегистрироваться">
+      <TextField fx:id="surname" layoutX="50.0" layoutY="237.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите Фамилию" styleClass="text-field" />
+      <PasswordField fx:id="password" layoutX="50.0" layoutY="391.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите пароль" />
+      <PasswordField fx:id="confirmPassword" layoutX="50.0" layoutY="448.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Подтвердите пароль" />
+      <Button layoutX="50.0" layoutY="504.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#processRegistration" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Зарегистрироваться">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="337.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
       <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="328.0" layoutY="14.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
+      <TextField fx:id="email" layoutX="50.0" layoutY="334.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите адрес электронной почты" styleClass="text-field" />
+      <TextField fx:id="secondName" layoutX="50.0" layoutY="284.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите Отчество" styleClass="text-field" />
    </children>
    <stylesheets>
       <URL value="@../../styles/index.css" />
