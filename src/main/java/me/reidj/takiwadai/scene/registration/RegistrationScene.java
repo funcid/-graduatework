@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.database.DbUtil;
+import me.reidj.takiwadai.exception.Exception;
+import me.reidj.takiwadai.exception.*;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 
@@ -14,11 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.UUID;
-
-import static me.reidj.takiwadai.exception.ExceptionType.*;
+import java.util.*;
 
 public class RegistrationScene extends AbstractScene {
 
@@ -42,25 +40,40 @@ public class RegistrationScene extends AbstractScene {
 
     private Timer timer;
 
+    private final List<Exception> exceptions = new ArrayList<>(Arrays.asList(
+            new FieldIsEmpty(),
+            new SymbolIsIncorrect(),
+            new EmailIsIncorrect(),
+            new PasswordShort(),
+            new PasswordIsNotEqual()
+    ));
+
     public RegistrationScene() {
 
     }
 
     public RegistrationScene(Stage stage) {
-        super("/fxml/registration/registration.fxml", stage);
+        super("/fxml/registration/registrationScene.fxml", stage);
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             Statement st = connection.createStatement();
             st.executeUpdate(DbUtil.CREATE_TABLE);
-        } catch (Exception e) {
+        } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
     void processRegistration() {
-        if (errorCheck(surname.getText(), name.getText(), secondName.getText(), email.getText(), password.getText(), confirmPassword.getText())) {
+        Exception exception = exceptions.stream()
+                .filter(exceptions -> exceptions.check(new String[]{
+                        surname.getText(), name.getText(), secondName.getText(), email.getText(), password.getText(), confirmPassword.getText()
+                })).findFirst().orElse(null);
+
+        if (exception != null) {
+            exception.alert();
             return;
         }
+
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(DbUtil.DUPLICATE_USER + "'" + email.getText() + "'");
@@ -88,34 +101,9 @@ public class RegistrationScene extends AbstractScene {
                 timer = new Timer();
                 timer.schedule(new RedirectTask(), 3000);
             }
-        } catch (Exception e) {
+        } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean errorCheck(String surnameText, String nameText, String secondNameText, String emailText, String passwordText, String passwordConfirmText) {
-        // TODO peace of shit
-        if (FIELD_IS_EMPTY.getPredicate().test(new String[]{
-                secondNameText, passwordText, nameText, emailText, passwordConfirmText, secondNameText
-        })) {
-            errorAlert(FIELD_IS_EMPTY.getContextText(), FIELD_IS_EMPTY.getHeaderText());
-            return true;
-        } else if (SYMBOL_IS_INCORRECT.getPredicate().test(new String[]{
-                surnameText, nameText, secondNameText
-        })) {
-            errorAlert(SYMBOL_IS_INCORRECT.getContextText(), SYMBOL_IS_INCORRECT.getHeaderText());
-            return true;
-        } else if (EMAIL_IS_INCORRECT.getPredicate().test(new String[]{emailText})) {
-            errorAlert(EMAIL_IS_INCORRECT.getContextText(), EMAIL_IS_INCORRECT.getHeaderText());
-            return true;
-        } else if (PASSWORD_IS_NOT_EQUAL.getPredicate().test(new String[]{passwordText, passwordConfirmText})) {
-            errorAlert(PASSWORD_IS_NOT_EQUAL.getContextText(), PASSWORD_IS_NOT_EQUAL.getHeaderText());
-            return true;
-        } else if (PASSWORD_SHORT.getPredicate().test(new String[]{passwordText})) {
-            errorAlert(PASSWORD_SHORT.getContextText(), PASSWORD_SHORT.getHeaderText());
-            return true;
-        }
-        return false;
     }
 
     @FXML

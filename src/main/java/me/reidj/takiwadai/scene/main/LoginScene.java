@@ -8,16 +8,16 @@ import me.reidj.takiwadai.scene.AbstractScene;
 
 import java.io.IOException;
 
-public class MainScene extends AbstractScene {
+public class LoginScene extends AbstractScene {
 
     @FXML
     private Pane contentArea;
 
-    public MainScene(Stage stage) {
-        super("/fxml/main/mainWindow.fxml", stage);
+    public LoginScene(Stage stage) {
+        super("/fxml/login/loginScene.fxml", stage);
     }
 
-    public MainScene() {
+    public LoginScene() {
 
     }
 
