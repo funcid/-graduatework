@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class FieldIsEmpty {
 
     public boolean check(String... strings) {
-        return Arrays.stream(strings).anyMatch(String::isEmpty);
+        return Arrays.stream(strings).anyMatch(s -> s == null || s.isEmpty());
     }
 
     public void alert() {

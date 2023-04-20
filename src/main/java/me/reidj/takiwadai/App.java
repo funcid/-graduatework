@@ -10,9 +10,6 @@ import me.reidj.takiwadai.scene.registration.RegistrationScene;
 import me.reidj.takiwadai.user.User;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class App extends Application {
 
@@ -24,7 +21,7 @@ public class App extends Application {
 
     private ApplicationScene applicationScene;
 
-    private final Map<UUID, User> userMap = new HashMap<>();
+    private User user;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -60,11 +57,11 @@ public class App extends Application {
         return registrationScene;
     }
 
-    public Map<UUID, User> getUserMap() {
-        return userMap;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public User getUser(String uuid) {
-        return userMap.get(UUID.fromString(uuid));
+    public User getUser() {
+        return user;
     }
 }

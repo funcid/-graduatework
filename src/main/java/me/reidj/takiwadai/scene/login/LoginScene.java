@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.UUID;
 
 public class LoginScene extends AbstractScene {
 
@@ -62,17 +61,15 @@ public class LoginScene extends AbstractScene {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String uuid = resultSet.getString("uuid");
-                App.getApp().getUserMap().put(
-                        UUID.fromString(uuid),
-                        new User(
-                                uuid,
-                                resultSet.getString("name"),
-                                resultSet.getString("surname"),
-                                resultSet.getString("secondName"),
-                                resultSet.getString("email"),
-                                resultSet.getString("password"),
-                                RoleType.valueOf(resultSet.getString("roleType"))
-                        ));
+                App.getApp().setUser(new User(
+                        uuid,
+                        resultSet.getString("name"),
+                        resultSet.getString("surname"),
+                        resultSet.getString("secondName"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        RoleType.valueOf(resultSet.getString("roleType"))
+                ));
                 contentArea.getChildren().removeAll();
                 contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
             } else {
