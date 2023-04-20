@@ -3,7 +3,8 @@ package me.reidj.takiwadai;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import me.reidj.takiwadai.scene.main.LoginScene;
+import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.scene.login.LoginScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
 
 import java.io.IOException;
@@ -22,6 +23,8 @@ public class App extends Application {
 
         this.mainScene = new LoginScene(stage);
         this.registrationScene = new RegistrationScene(stage);
+
+        new Exceptions().init();
 
         stage.setScene(new Scene(mainScene.getParent()));
         stage.show();

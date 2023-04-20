@@ -6,8 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.database.DbUtil;
-import me.reidj.takiwadai.exception.Exception;
-import me.reidj.takiwadai.exception.*;
+import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 
@@ -16,7 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.UUID;
 
 public class RegistrationScene extends AbstractScene {
 
@@ -40,14 +41,6 @@ public class RegistrationScene extends AbstractScene {
 
     private Timer timer;
 
-    private final List<Exception> exceptions = new ArrayList<>(Arrays.asList(
-            new FieldIsEmpty(),
-            new SymbolIsIncorrect(),
-            new EmailIsIncorrect(),
-            new PasswordShort(),
-            new PasswordIsNotEqual()
-    ));
-
     public RegistrationScene() {
 
     }
@@ -64,13 +57,27 @@ public class RegistrationScene extends AbstractScene {
 
     @FXML
     void processRegistration() {
-        Exception exception = exceptions.stream()
-                .filter(exceptions -> exceptions.check(new String[]{
-                        surname.getText(), name.getText(), secondName.getText(), email.getText(), password.getText(), confirmPassword.getText()
-                })).findFirst().orElse(null);
+        String nameText = name.getText();
+        String surnameText = surname.getText();
+        String secondNameText = secondName.getText();
+        String emailText = email.getText();
+        String passwordText = password.getText();
+        String confirmPasswordText = confirmPassword.getText();
 
-        if (exception != null) {
-            exception.alert();
+        if (Exceptions.emailIsIncorrect.check(emailText)) {
+            Exceptions.emailIsIncorrect.alert();
+            return;
+        } else if (Exceptions.fieldIsEmpty.check(nameText, surnameText, secondNameText, emailText, passwordText, confirmPasswordText)) {
+            Exceptions.fieldIsEmpty.alert();
+            return;
+        } else if (Exceptions.passwordShort.check(passwordText)) {
+            Exceptions.passwordShort.alert();
+            return;
+        } else if (Exceptions.symbolIsIncorrect.check(nameText, surnameText, secondNameText)) {
+            Exceptions.symbolIsIncorrect.alert();
+            return;
+        } else if (Exceptions.passwordIsNotEqual.check(passwordText, confirmPasswordText)) {
+            Exceptions.passwordIsNotEqual.alert();
             return;
         }
 
@@ -90,11 +97,11 @@ public class RegistrationScene extends AbstractScene {
             if (resultCount == 0) {
                 PreparedStatement prepareStatement = connection.prepareStatement(DbUtil.CREATE_USER);
                 prepareStatement.setString(1, UUID.randomUUID().toString());
-                prepareStatement.setString(2, name.getText());
-                prepareStatement.setString(3, surname.getText());
-                prepareStatement.setString(4, secondName.getText());
-                prepareStatement.setString(5, email.getText());
-                prepareStatement.setString(6, password.getText());
+                prepareStatement.setString(2, nameText);
+                prepareStatement.setString(3, surnameText);
+                prepareStatement.setString(4, secondNameText);
+                prepareStatement.setString(5, emailText);
+                prepareStatement.setString(6, passwordText);
                 prepareStatement.setString(7, RoleType.USER.name());
                 prepareStatement.execute();
                 fineAlert("Через 3 секунды Вы будете автоматически перенаправлены на страницу авторизации.", "Регистрация прошла успешно!");

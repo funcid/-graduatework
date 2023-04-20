@@ -14,6 +14,7 @@ public class DbUtil {
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (uuid TEXT, name TEXT, surname TEXT, secondName TEXT, email TEXT, password TEXT, roleType TEXT);";
     public static final String CREATE_USER = "INSERT INTO users (uuid, name, surname, secondName, email, password, roleType) VALUES(?, ?, ?, ?, ?, ?, ?);";
     public static final String DUPLICATE_USER = "SELECT COUNT(*) FROM users WHERE email = ";
+    public static final String SELECT_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
 
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";

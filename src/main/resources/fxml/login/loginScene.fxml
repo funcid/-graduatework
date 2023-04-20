@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.reidj.takiwadai.scene.main.LoginScene">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.reidj.takiwadai.scene.login.LoginScene">
     <children>
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2c1a54;">
             <children>
@@ -37,10 +37,10 @@
                 <Label layoutX="36.0" layoutY="93.0" styleClass="application-name" text="Добро пожаловать," textFill="#545454">
                 </Label>
                 <Label layoutX="36.0" layoutY="124.0" styleClass="welcome" text="Войдите, чтобы продолжить" textFill="#a3a3a3" />
-                <PasswordField layoutX="50.0" layoutY="278.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Пароль" />
+                <PasswordField fx:id="password" layoutX="50.0" layoutY="278.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Пароль" />
                 <Label layoutX="238.0" layoutY="329.0" styleClass="forgetBtn" text="Забыли пароль?" textFill="#a3a3a3" />
-                <TextField layoutX="50.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Электронный адрес" styleClass="text-field" />
-            <Button layoutX="50.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Авторизоваться">
+                <TextField fx:id="email" layoutX="50.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Электронный адрес" styleClass="text-field" />
+            <Button layoutX="50.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onLoginProcess" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Авторизоваться">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
