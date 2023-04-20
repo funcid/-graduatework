@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.database.DbUtil;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
@@ -49,7 +48,7 @@ public class RegistrationScene extends AbstractScene {
         super("/fxml/registration/registrationScene.fxml", stage);
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             Statement st = connection.createStatement();
-            st.executeUpdate(DbUtil.CREATE_TABLE);
+            st.executeUpdate(DbUtil.CREATE_TABLE_USERS);
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
@@ -111,11 +110,6 @@ public class RegistrationScene extends AbstractScene {
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void move() throws IOException {
-        App.getApp().getMainScene().getScene().setRoot(App.getApp().getMainScene().getParent());
     }
 
     class RedirectTask extends TimerTask {

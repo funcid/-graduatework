@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import me.reidj.takiwadai.App;
 
 import java.io.IOException;
 
@@ -35,6 +36,11 @@ public abstract class AbstractVisualComponent {
         alert.setTitle("Успешно!");
         alert.setHeaderText(headerText);
         alert.show();
+    }
+
+    @FXML
+    protected void move() throws IOException {
+        App.getApp().getMainScene().getScene().setRoot(App.getApp().getMainScene().getParent());
     }
 
     @FXML

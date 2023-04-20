@@ -11,10 +11,12 @@ import java.util.Properties;
 
 public class DbUtil {
 
-    public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (uuid TEXT, name TEXT, surname TEXT, secondName TEXT, email TEXT, password TEXT, roleType TEXT);";
+    public static final String CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (uuid TEXT, name TEXT, surname TEXT, secondName TEXT, email TEXT, password TEXT, roleType TEXT);";
+    public static final String CREATE_TABLE_APPLICATIONS = "CREATE TABLE IF NOT EXISTS applications (id INT AUTO_INCREMENT, uuid TEXT, name TEXT, surname TEXT, secondName TEXT, email TEXT, description TEXT, date DATE, category TEXT, PRIMARY KEY (id));";
     public static final String CREATE_USER = "INSERT INTO users (uuid, name, surname, secondName, email, password, roleType) VALUES(?, ?, ?, ?, ?, ?, ?);";
     public static final String DUPLICATE_USER = "SELECT COUNT(*) FROM users WHERE email = ";
     public static final String SELECT_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
+    public static final String CREATE_APPLICATION = "INSERT INTO users (id, uuid, name, surname, secondName, email, description, date, category) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";
