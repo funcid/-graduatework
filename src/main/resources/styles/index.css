@@ -68,3 +68,7 @@
 .move-button {
     -fx-image: url('../images/move-button.png');
 }
+
+.log-button {
+    -fx-image: url('../images/log.png');
+}

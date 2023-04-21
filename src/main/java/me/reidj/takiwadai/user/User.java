@@ -1,4 +1,4 @@
 package me.reidj.takiwadai.user;
 
-public record User(String uuid, String name, String surname, String secondName, String email, String password, RoleType roleType) {
+public record User(int id, String name, String surname, String secondName, String email, String password, RoleType roleType) {
 }

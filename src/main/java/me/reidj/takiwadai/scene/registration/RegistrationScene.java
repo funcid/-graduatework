@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import me.reidj.takiwadai.database.DbUtil;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
+import me.reidj.takiwadai.util.DbUtil;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.UUID;
 
 public class RegistrationScene extends AbstractScene {
 
@@ -95,13 +94,12 @@ public class RegistrationScene extends AbstractScene {
 
             if (resultCount == 0) {
                 PreparedStatement prepareStatement = connection.prepareStatement(DbUtil.CREATE_USER);
-                prepareStatement.setString(1, UUID.randomUUID().toString());
-                prepareStatement.setString(2, nameText);
-                prepareStatement.setString(3, surnameText);
-                prepareStatement.setString(4, secondNameText);
-                prepareStatement.setString(5, emailText);
-                prepareStatement.setString(6, passwordText);
-                prepareStatement.setString(7, RoleType.USER.name());
+                prepareStatement.setString(1, nameText);
+                prepareStatement.setString(2, surnameText);
+                prepareStatement.setString(3, secondNameText);
+                prepareStatement.setString(4, emailText);
+                prepareStatement.setString(5, passwordText);
+                prepareStatement.setString(6, RoleType.USER.name());
                 prepareStatement.execute();
                 fineAlert("Через 3 секунды Вы будете автоматически перенаправлены на страницу авторизации.", "Регистрация прошла успешно!");
                 timer = new Timer();
@@ -116,7 +114,7 @@ public class RegistrationScene extends AbstractScene {
         @Override
         public void run() {
             try {
-                move();
+                backLoginScreen();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

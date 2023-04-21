@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
+import me.reidj.takiwadai.scene.log.LogScene;
 import me.reidj.takiwadai.scene.login.LoginScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
 import me.reidj.takiwadai.user.User;
@@ -15,11 +16,13 @@ public class App extends Application {
 
     private static App app;
 
-    private LoginScene mainScene;
+    private LoginScene loginScene;
 
     private RegistrationScene registrationScene;
 
     private ApplicationScene applicationScene;
+
+    private LogScene logScene;
 
     private User user;
 
@@ -27,13 +30,14 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         app = this;
 
-        this.mainScene = new LoginScene(stage);
+        this.loginScene = new LoginScene(stage);
         this.registrationScene = new RegistrationScene(stage);
         this.applicationScene = new ApplicationScene(stage);
+        this.logScene = new LogScene(stage);
 
         new Exceptions().init();
 
-        stage.setScene(new Scene(mainScene.getParent()));
+        stage.setScene(new Scene(loginScene.getParent()));
         stage.show();
     }
 
@@ -49,12 +53,16 @@ public class App extends Application {
         return applicationScene;
     }
 
-    public LoginScene getMainScene() {
-        return mainScene;
+    public LoginScene getLoginScene() {
+        return loginScene;
     }
 
     public RegistrationScene getRegistrationScene() {
         return registrationScene;
+    }
+
+    public LogScene getLogScene() {
+        return logScene;
     }
 
     public void setUser(User user) {

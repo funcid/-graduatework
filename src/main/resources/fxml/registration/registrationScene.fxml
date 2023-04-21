@@ -24,7 +24,7 @@
          </font>
       </Button>
       <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="337.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
-      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="328.0" layoutY="14.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
+      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="328.0" layoutY="14.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
       <TextField fx:id="email" layoutX="50.0" layoutY="334.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите адрес электронной почты" styleClass="text-field" />
       <TextField fx:id="secondName" layoutX="50.0" layoutY="284.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Введите Отчество" styleClass="text-field" />
    </children>

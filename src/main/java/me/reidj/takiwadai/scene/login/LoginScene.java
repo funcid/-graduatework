@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
-import me.reidj.takiwadai.database.DbUtil;
+import me.reidj.takiwadai.util.DbUtil;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
@@ -60,9 +60,8 @@ public class LoginScene extends AbstractScene {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String uuid = resultSet.getString("uuid");
                 App.getApp().setUser(new User(
-                        uuid,
+                        resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
                         resultSet.getString("secondName"),
@@ -70,8 +69,7 @@ public class LoginScene extends AbstractScene {
                         resultSet.getString("password"),
                         RoleType.valueOf(resultSet.getString("roleType"))
                 ));
-                contentArea.getChildren().removeAll();
-                contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
+                openApplicationScene();
             } else {
                 errorAlert("Неверный логин или пароль!", "");
             }
@@ -80,9 +78,18 @@ public class LoginScene extends AbstractScene {
         }
     }
 
+    public void openApplicationScene() throws IOException {
+        childrenRemove();
+        contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
+    }
+
     @FXML
-    void openRegistration() throws IOException {
-        contentArea.getChildren().removeAll();
+    public void openRegistration() throws IOException {
+        childrenRemove();
         contentArea.getChildren().setAll(App.getApp().getRegistrationScene().getParent());
+    }
+
+    private void childrenRemove() {
+        contentArea.getChildren().removeAll();
     }
 }

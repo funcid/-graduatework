@@ -39,8 +39,8 @@ public abstract class AbstractVisualComponent {
     }
 
     @FXML
-    protected void move() throws IOException {
-        App.getApp().getMainScene().getScene().setRoot(App.getApp().getMainScene().getParent());
+    protected void backLoginScreen() throws IOException {
+        App.getApp().getLoginScene().getScene().setRoot(App.getApp().getLoginScene().getParent());
     }
 
     @FXML

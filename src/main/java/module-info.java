@@ -14,9 +14,11 @@ module me.reidj.takiwadai {
     exports me.reidj.takiwadai.scene.login;
     exports me.reidj.takiwadai.scene.registration;
     exports me.reidj.takiwadai.scene.application;
+    exports me.reidj.takiwadai.scene.log;
     opens me.reidj.takiwadai.scene.login to javafx.fxml;
     opens me.reidj.takiwadai.scene.registration to javafx.fxml;
     opens me.reidj.takiwadai.scene.application to javafx.fxml;
+    opens me.reidj.takiwadai.scene.log to javafx.fxml;
     exports me.reidj.takiwadai.exception;
     opens me.reidj.takiwadai.exception to javafx.fxml;
 }

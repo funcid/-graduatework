@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.reidj.takiwadai.scene.log.LogScene">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" styleClass="full-logo" />
+      <Label layoutX="66.0" layoutY="123.0" styleClass="application-name" text="Журнал" textFill="#545454" />
+      <ScrollPane layoutX="65.0" layoutY="171.0" prefHeight="288.0" prefWidth="300.0">
+        <content>
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="300.0">
+               <children>
+                  <TextArea fx:id="logOutput" editable="false" layoutY="-7.0" prefHeight="281.0" prefWidth="300.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="347.0" layoutY="10.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
+      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="338.0" layoutY="24.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
+   </children>
+   <stylesheets>
+      <URL value="@../../styles/index.css" />
+   </stylesheets>
+</AnchorPane>
