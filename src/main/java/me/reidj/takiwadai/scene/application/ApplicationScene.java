@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
+import me.reidj.takiwadai.application.StatusType;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.User;
@@ -85,7 +86,9 @@ public class ApplicationScene extends AbstractScene {
             prepareStatement.setString(6, descriptionText);
             prepareStatement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
             prepareStatement.setString(8, category);
+            prepareStatement.setString(9, StatusType.SEND.getTitle());
             prepareStatement.execute();
+            fineAlert("Заявка создана успешно!", "");
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 
 public class LogScene extends AbstractScene {
 
+
     @FXML
     private TextArea logOutput;
 
@@ -23,7 +24,8 @@ public class LogScene extends AbstractScene {
     public LogScene() {
     }
 
-    private final StringBuilder fieldContent = new StringBuilder();
+    private final StringBuilder fieldContent = new StringBuilder().append("****************************************\n");
+    private static final String SPLIT = "\n-----------------------\n";
 
     @FXML
     public void initialize() {
@@ -34,9 +36,23 @@ public class LogScene extends AbstractScene {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                fieldContent.append(resultSet.getString("date")).append(" ");
-                fieldContent.append(resultSet.getString("category")).append(" ");
-                fieldContent.append(resultSet.getString("description")).append("\n");
+                fieldContent.append("ДАТА:")
+                        .append("\n")
+                        .append(resultSet.getString("date"))
+                        .append(SPLIT);
+                fieldContent.append("КАТЕГОРИЯ:")
+                        .append("\n")
+                        .append(resultSet.getString("category"))
+                        .append(SPLIT);
+                fieldContent.append("ОПИСАНИЕ:")
+                        .append("\n")
+                        .append(resultSet.getString("description"))
+                        .append(SPLIT);
+                fieldContent.append("СТАТУС:")
+                        .append("\n")
+                        .append(resultSet.getString("status"))
+                        .append(" ")
+                        .append("\n****************************************\n");
             }
             logOutput.setText(fieldContent.toString());
         } catch (java.lang.Exception e) {

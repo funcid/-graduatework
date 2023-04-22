@@ -12,12 +12,12 @@ import java.util.Properties;
 public class DbUtil {
 
     public static final String CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT, name TEXT, surname TEXT, secondName TEXT, email TEXT, password TEXT, roleType TEXT, PRIMARY KEY(id));";
-    public static final String CREATE_TABLE_APPLICATIONS = "CREATE TABLE IF NOT EXISTS applications (id INT AUTO_INCREMENT, userId INT, name TEXT, surname TEXT, secondName TEXT, email TEXT, description TEXT, date TIMESTAMP, category TEXT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users (id));";
+    public static final String CREATE_TABLE_APPLICATIONS = "CREATE TABLE IF NOT EXISTS applications (id INT AUTO_INCREMENT, userId INT, name TEXT, surname TEXT, secondName TEXT, email TEXT, description TEXT, date TIMESTAMP, category TEXT, status TEXT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users (id));";
     public static final String CREATE_USER = "INSERT INTO users (name, surname, secondName, email, password, roleType) VALUES(?, ?, ?, ?, ?, ?);";
     public static final String DUPLICATE_USER = "SELECT COUNT(*) FROM users WHERE email = ";
     public static final String SELECT_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
     public static final String SELECT_APPLICATION = "SELECT * FROM applications WHERE userId = ?";
-    public static final String CREATE_APPLICATION = "INSERT INTO applications (userId, name, surname, secondName, email, description, date, category) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String CREATE_APPLICATION = "INSERT INTO applications (userId, name, surname, secondName, email, description, date, category, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";
