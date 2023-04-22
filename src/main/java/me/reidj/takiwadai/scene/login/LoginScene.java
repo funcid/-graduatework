@@ -60,7 +60,7 @@ public class LoginScene extends AbstractScene {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                App.getApp().setUser(new User(
+                User user = new User(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
@@ -68,8 +68,13 @@ public class LoginScene extends AbstractScene {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         RoleType.valueOf(resultSet.getString("roleType"))
-                ));
-                openApplicationScene();
+                );
+                App.getApp().setUser(user);
+                if (user.roleType() == RoleType.USER) {
+                    openApplicationScene();
+                } else {
+                    openAdminScene();
+                }
             } else {
                 errorAlert("Неверный логин или пароль!", "");
             }
@@ -78,9 +83,14 @@ public class LoginScene extends AbstractScene {
         }
     }
 
-    public void openApplicationScene() throws IOException {
+    private void openApplicationScene() throws IOException {
         childrenRemove();
         contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
+    }
+
+    private void openAdminScene() throws IOException {
+        childrenRemove();
+        contentArea.getChildren().setAll(App.getApp().getAdminScene().getParent());
     }
 
     @FXML

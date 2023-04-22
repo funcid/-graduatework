@@ -1,17 +1,7 @@
 package me.reidj.takiwadai.user;
 
 public enum RoleType {
-    USER(1),
-    ADMIN(2)
+    USER,
+    ADMIN
     ;
-
-    private final int priority;
-
-    RoleType(int priority) {
-        this.priority = priority;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
 }
