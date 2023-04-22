@@ -2,7 +2,9 @@ package me.reidj.takiwadai.scene.application;
 
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
@@ -12,7 +14,10 @@ import me.reidj.takiwadai.user.User;
 import me.reidj.takiwadai.util.DbUtil;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
 public class ApplicationScene extends AbstractScene {
 
@@ -24,6 +29,12 @@ public class ApplicationScene extends AbstractScene {
 
     @FXML
     private Pane contentArea;
+
+    @FXML
+    private Button send;
+
+    @FXML
+    private TextField customCategory;
 
     public ApplicationScene(Stage stage) {
         super("/fxml/application/applicationScene.fxml", stage);
@@ -37,7 +48,14 @@ public class ApplicationScene extends AbstractScene {
 
     @FXML
     public void initialize() {
-        category.getItems().addAll("Сайт", "Техника", "Установка ПО");
+        category.setValue("Проблемы с сайтом");
+        category.getItems().addAll("Проблемы с сайтом", "Проблемы с техникой", "Установка ПО", "Своё");
+        category.setOnAction(event -> {
+            boolean has = category.getValue().contains("Своё");
+            customCategory.setVisible(has);
+            description.setLayoutY(has ? 300 : 256);
+            send.setLayoutY(has ? 510 : 481);
+        });
     }
 
     public ApplicationScene() {
@@ -47,8 +65,10 @@ public class ApplicationScene extends AbstractScene {
     void sendProcess() {
         String descriptionText = description.getText();
         String categoryValue = category.getValue();
+        String customCategoryValue = customCategory.getText();
+        String category = categoryValue.contains("Своё") ? customCategoryValue : categoryValue;
 
-        if (Exceptions.fieldIsEmpty.check(descriptionText, categoryValue)) {
+        if (Exceptions.fieldIsEmpty.check(descriptionText, category)) {
             Exceptions.fieldIsEmpty.alert();
             return;
         }
@@ -64,7 +84,7 @@ public class ApplicationScene extends AbstractScene {
             prepareStatement.setString(5, user.email());
             prepareStatement.setString(6, descriptionText);
             prepareStatement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-            prepareStatement.setString(8, categoryValue);
+            prepareStatement.setString(8, category);
             prepareStatement.execute();
         } catch (java.lang.Exception e) {
             e.printStackTrace();
