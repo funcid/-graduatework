@@ -9,6 +9,7 @@ import me.reidj.takiwadai.scene.admin.AdminScene;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
 import me.reidj.takiwadai.scene.log.LogScene;
 import me.reidj.takiwadai.scene.login.LoginScene;
+import me.reidj.takiwadai.scene.profile.ProfileScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
 import me.reidj.takiwadai.user.User;
 
@@ -26,6 +27,7 @@ public class App extends Application {
 
     private LogScene logScene;
     private AdminScene adminScene;
+    private ProfileScene profileScene;
 
     private FileManager settingsManager;
 
@@ -40,6 +42,7 @@ public class App extends Application {
         this.applicationScene = new ApplicationScene(stage);
         this.logScene = new LogScene(stage);
         this.adminScene = new AdminScene(stage);
+        this.profileScene = new ProfileScene(stage);
 
         this.settingsManager = new FileManager();
         this.settingsManager.createFile();
