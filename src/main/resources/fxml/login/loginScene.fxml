@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -39,14 +40,15 @@
                 <Label layoutX="36.0" layoutY="124.0" styleClass="welcome" text="Войдите, чтобы продолжить" textFill="#a3a3a3" />
                 <PasswordField fx:id="password" layoutX="50.0" layoutY="278.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Пароль" />
                 <TextField fx:id="email" layoutX="50.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Электронный адрес" styleClass="text-field" />
-            <Button layoutX="50.0" layoutY="340.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onLoginProcess" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Авторизоваться">
+            <Button layoutX="50.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onLoginProcess" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Авторизоваться">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="88.0" layoutY="412.0" styleClass="forgetBtn" text="Нету аккаунта?" textFill="#a3a3a3" />
-            <Label layoutX="198.0" layoutY="412.0" onMouseClicked="#openRegistration" styleClass="register" text="Зарегистрироваться" textFill="#2c1a54" />
+            <Label layoutX="88.0" layoutY="438.0" styleClass="forgetBtn" text="Нету аккаунта?" textFill="#a3a3a3" />
+            <Label layoutX="198.0" layoutY="438.0" onMouseClicked="#openRegistration" styleClass="register" text="Зарегистрироваться" textFill="#2c1a54" />
             <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="339.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
+            <JFXCheckBox fx:id="saveData" checkedColor="#2c1a54" layoutX="132.0" layoutY="334.0" onMouseClicked="#onSaveData" text="Сохранить данные" unCheckedColor="#2c1a54" />
             </children>
         </Pane>
     </children>

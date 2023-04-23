@@ -33,6 +33,7 @@ javafx {
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.32'
     implementation 'com.zaxxer:HikariCP:5.0.1'
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.jfoenix:jfoenix:9.0.10'
 }
 

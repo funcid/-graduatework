@@ -1,16 +1,18 @@
 package me.reidj.takiwadai.scene.login;
 
+import com.google.gson.Gson;
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.App;
-import me.reidj.takiwadai.util.DbUtil;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 import me.reidj.takiwadai.user.User;
+import me.reidj.takiwadai.util.DbUtil;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,6 +30,11 @@ public class LoginScene extends AbstractScene {
     @FXML
     private PasswordField password;
 
+    @FXML
+    private JFXCheckBox saveData;
+
+    private final Gson gson = new Gson();
+
     public LoginScene(Stage stage) {
         super("/fxml/login/loginScene.fxml", stage);
     }
@@ -37,17 +44,32 @@ public class LoginScene extends AbstractScene {
     }
 
     @FXML
+    public void initialize() {
+        String read = new String(App.getApp().getSettingsManager().onRead());
+        String data = gson.fromJson(read, String.class);
+        if (data != null) {
+            String[] pair = data.split(":");
+            email.setText(pair[0]);
+            password.setText(pair[1]);
+            saveData.fire();
+        }
+    }
+
+    @FXML
     void onLoginProcess() {
         String emailText = email.getText();
         String passwordText = password.getText();
+        tryLogin(emailText, passwordText);
+    }
 
-        if (Exceptions.fieldIsEmpty.check(emailText, passwordText)) {
+    private void tryLogin(String email, String password) {
+        if (Exceptions.fieldIsEmpty.check(email, password)) {
             Exceptions.fieldIsEmpty.alert();
             return;
-        } else if (Exceptions.emailIsIncorrect.check(emailText)) {
+        } else if (Exceptions.emailIsIncorrect.check(email)) {
             Exceptions.emailIsIncorrect.alert();
             return;
-        } else if (Exceptions.passwordShort.check(passwordText)) {
+        } else if (Exceptions.passwordShort.check(password)) {
             Exceptions.passwordShort.alert();
             return;
         }
@@ -55,8 +77,8 @@ public class LoginScene extends AbstractScene {
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_USER);
 
-            preparedStatement.setString(1, emailText);
-            preparedStatement.setString(2, passwordText);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -81,6 +103,16 @@ public class LoginScene extends AbstractScene {
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void onSaveData() {
+        String emailText = email.getText();
+        String passwordText = password.getText();
+        if (Exceptions.fieldIsEmpty.check(emailText, passwordText)) {
+            return;
+        }
+        App.getApp().getSettingsManager().onWrite(gson.toJson(emailText + ":" + passwordText).getBytes());
     }
 
     private void openApplicationScene() throws IOException {

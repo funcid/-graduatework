@@ -5,6 +5,7 @@ module me.reidj.takiwadai {
     requires com.google.protobuf;
     requires java.sql;
     requires com.jfoenix;
+    requires com.google.gson;
 
     opens me.reidj.takiwadai to javafx.fxml;
     exports me.reidj.takiwadai;
@@ -22,5 +23,6 @@ module me.reidj.takiwadai {
     opens me.reidj.takiwadai.scene.log to javafx.fxml;
     opens me.reidj.takiwadai.scene.admin to javafx.fxml;
     exports me.reidj.takiwadai.exception;
+    exports me.reidj.takiwadai.config;
     opens me.reidj.takiwadai.exception to javafx.fxml;
 }

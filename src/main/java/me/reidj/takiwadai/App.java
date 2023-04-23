@@ -3,6 +3,7 @@ package me.reidj.takiwadai;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import me.reidj.takiwadai.config.FileManager;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.admin.AdminScene;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
@@ -26,6 +27,8 @@ public class App extends Application {
     private LogScene logScene;
     private AdminScene adminScene;
 
+    private FileManager settingsManager;
+
     private User user;
 
     @Override
@@ -37,6 +40,9 @@ public class App extends Application {
         this.applicationScene = new ApplicationScene(stage);
         this.logScene = new LogScene(stage);
         this.adminScene = new AdminScene(stage);
+
+        this.settingsManager = new FileManager();
+        this.settingsManager.createFile();
 
         new Exceptions().init();
 
@@ -71,6 +77,10 @@ public class App extends Application {
 
     public AdminScene getAdminScene() {
         return adminScene;
+    }
+
+    public FileManager getSettingsManager() {
+        return settingsManager;
     }
 
     public void setUser(User user) {
