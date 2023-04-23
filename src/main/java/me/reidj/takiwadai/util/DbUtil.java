@@ -17,7 +17,10 @@ public class DbUtil {
     public static final String DUPLICATE_USER = "SELECT COUNT(*) FROM users WHERE email = ";
     public static final String SELECT_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
     public static final String SELECT_APPLICATION = "SELECT * FROM applications WHERE userId = ?";
+    public static final String SELECT_APPLICATIONS = "SELECT * FROM applications";
     public static final String CREATE_APPLICATION = "INSERT INTO applications (userId, name, surname, secondName, email, description, date, category, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String DELETE_APPLICATION = "DELETE FROM applications WHERE id = ?";
+    public static final String UPDATE_APPLICATION_STATUS = "UPDATE applications SET status = ? WHERE id = ?";
 
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";

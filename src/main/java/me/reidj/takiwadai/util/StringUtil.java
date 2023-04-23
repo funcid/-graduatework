@@ -14,4 +14,8 @@ public class StringUtil {
         Matcher matcher = pattern.matcher(input);
         return !matcher.matches();
     }
+
+    public static boolean isNumber(String numbers) {
+        return numbers.chars().allMatch(Character::isDigit);
+    }
 }

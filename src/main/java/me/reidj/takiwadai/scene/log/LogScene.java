@@ -10,9 +10,11 @@ import me.reidj.takiwadai.util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LogScene extends AbstractScene {
 
+    public static final String SPLIT = "\n-----------------------\n";
 
     @FXML
     private TextArea logOutput;
@@ -24,8 +26,7 @@ public class LogScene extends AbstractScene {
     public LogScene() {
     }
 
-    private final StringBuilder fieldContent = new StringBuilder().append("****************************************\n");
-    private static final String SPLIT = "\n-----------------------\n";
+    public final StringBuilder fieldContent = new StringBuilder().append("****************************************\n");
 
     @FXML
     public void initialize() {
@@ -36,27 +37,31 @@ public class LogScene extends AbstractScene {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                fieldContent.append("ДАТА:")
-                        .append("\n")
-                        .append(resultSet.getString("date"))
-                        .append(SPLIT);
-                fieldContent.append("КАТЕГОРИЯ:")
-                        .append("\n")
-                        .append(resultSet.getString("category"))
-                        .append(SPLIT);
-                fieldContent.append("ОПИСАНИЕ:")
-                        .append("\n")
-                        .append(resultSet.getString("description"))
-                        .append(SPLIT);
-                fieldContent.append("СТАТУС:")
-                        .append("\n")
-                        .append(resultSet.getString("status"))
-                        .append(" ")
-                        .append("\n****************************************\n");
+                logText(resultSet, fieldContent, SPLIT);
             }
             logOutput.setText(fieldContent.toString());
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void logText(ResultSet resultSet, StringBuilder fieldContent, String split) throws SQLException {
+        fieldContent.append("ДАТА СОЗДАНИЯ:")
+                .append("\n")
+                .append(resultSet.getString("date"))
+                .append(split);
+        fieldContent.append("КАТЕГОРИЯ:")
+                .append("\n")
+                .append(resultSet.getString("category"))
+                .append(split);
+        fieldContent.append("ОПИСАНИЕ:")
+                .append("\n")
+                .append(resultSet.getString("description"))
+                .append(split);
+        fieldContent.append("СТАТУС:")
+                .append("\n")
+                .append(resultSet.getString("status"))
+                .append(" ")
+                .append("\n****************************************\n");
     }
 }

@@ -4,7 +4,7 @@ public enum StatusType {
     SEND("Отправлено"),
     IN_WORK("В работе"),
     CORRECTED("Выполнено"),
-    DENIED("Отказано")
+    DENIED("Отказ")
     ;
 
     private final String title;
