@@ -11,6 +11,7 @@ import me.reidj.takiwadai.scene.log.LogScene;
 import me.reidj.takiwadai.scene.login.LoginScene;
 import me.reidj.takiwadai.scene.profile.ProfileScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
+import me.reidj.takiwadai.service.MailSender;
 import me.reidj.takiwadai.user.User;
 
 import java.io.IOException;
@@ -48,6 +49,8 @@ public class App extends Application {
         this.settingsManager.createFile();
 
         new Exceptions().init();
+
+        new MailSender().send("reidjjava@gmail.com");
 
         stage.setScene(new Scene(loginScene.getParent()));
         stage.show();

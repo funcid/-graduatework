@@ -6,6 +6,8 @@ module me.reidj.takiwadai {
     requires java.sql;
     requires com.jfoenix;
     requires com.google.gson;
+    requires java.mail;
+    requires static activation;
 
     opens me.reidj.takiwadai to javafx.fxml;
     exports me.reidj.takiwadai;
