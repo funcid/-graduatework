@@ -13,6 +13,7 @@ import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 import me.reidj.takiwadai.user.User;
 import me.reidj.takiwadai.util.DbUtil;
+import me.reidj.takiwadai.util.Utils;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -93,7 +94,7 @@ public class LoginScene extends AbstractScene {
                 );
                 App.getApp().setUser(user);
                 if (user.roleType() == RoleType.USER) {
-                    openApplicationScene();
+                    openProfile();
                 } else {
                     openAdminScene();
                 }
@@ -120,9 +121,9 @@ public class LoginScene extends AbstractScene {
         openForgottenPasswordScene();
     }
 
-    private void openApplicationScene() throws IOException {
+    private void openProfile() throws IOException {
         childrenRemove();
-        contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
+        contentArea.getChildren().setAll(App.getApp().getProfileScene().getParent());
     }
 
     private void openForgottenPasswordScene() throws IOException {
@@ -142,6 +143,6 @@ public class LoginScene extends AbstractScene {
     }
 
     private void childrenRemove() {
-        contentArea.getChildren().removeAll();
+        Utils.childrenRemove(contentArea.getChildren());
     }
 }

@@ -15,6 +15,7 @@ public class DbUtil {
     public static final String CREATE_TABLE_APPLICATIONS = "CREATE TABLE IF NOT EXISTS applications (id INT AUTO_INCREMENT, userId INT, name TEXT, surname TEXT, secondName TEXT, email TEXT, description TEXT, date TIMESTAMP, category TEXT, status TEXT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users (id));";
     public static final String CREATE_USER = "INSERT INTO users (name, surname, secondName, email, password, roleType) VALUES(?, ?, ?, ?, ?, ?);";
     public static final String DUPLICATE_USER = "SELECT COUNT(*) FROM users WHERE email = ";
+    public static final String UPDATE_USER = "UPDATE users SET name = ?, surname = ?, secondName = ?, password = ? WHERE id = ?";
     public static final String SELECT_USER_BY_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE email = ? AND password = ?";
     public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     public static final String SELECT_APPLICATION = "SELECT * FROM applications WHERE userId = ?";

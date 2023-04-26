@@ -42,7 +42,7 @@ public class ForgottenPasswordScene extends AbstractScene {
 
             ResultSet resultSet = selectUser.executeQuery();
             if (resultSet.next()) {
-                String newPassword = new MailSender().send(emailText);
+                String newPassword = new MailSender().send(emailText, resultSet.getString("name"));
 
                 PreparedStatement updatePassword = connection.prepareStatement(DbUtil.UPDATE_USER_PASSWORD);
 

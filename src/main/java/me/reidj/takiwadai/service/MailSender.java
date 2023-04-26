@@ -15,7 +15,7 @@ public class MailSender {
 
     private final Properties properties = System.getProperties();
 
-    public String send(String to) {
+    public String send(String to, String name) {
         properties.setProperty("mail.smtp.host", HOST);
         properties.setProperty("mail.smtp.port", PORT);
         properties.setProperty("mail.smtp.ssl.enable", "true");
@@ -30,17 +30,17 @@ public class MailSender {
                     }
                 }
         );
-        return generateMessage(to, session);
+        return generateMessage(to, session, name);
     }
 
-    private static String generateMessage(String to, Session session) {
+    private static String generateMessage(String to, Session session, String name) {
         String newPassword = passwordGenerator();
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(FROM));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Takiwadai | Восстановление пароля");
-            message.setText("Здравствуйте." +
+            message.setText("Здравствуйте " + name + "." +
                     "\n\n" +
                     "Для Вашей учетной записи " + to + " в приложении «Takiwadai» было запрошено " +
                     "восстановление пароля. Новый пароль: " + newPassword

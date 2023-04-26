@@ -1,12 +1,12 @@
 package me.reidj.takiwadai.exception;
 
 import me.reidj.takiwadai.App;
-import me.reidj.takiwadai.util.StringUtil;
+import me.reidj.takiwadai.util.Utils;
 
 public class EmailIsIncorrect {
 
     public boolean check(String email) {
-        return StringUtil.isRegularExpressionCheck(StringUtil.EMAIL_REGEX, email);
+        return Utils.isRegularExpressionCheck(Utils.EMAIL_REGEX, email);
     }
 
     public void alert() {

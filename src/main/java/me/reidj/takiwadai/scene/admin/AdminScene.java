@@ -10,7 +10,7 @@ import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.scene.log.LogScene;
 import me.reidj.takiwadai.util.DbUtil;
-import me.reidj.takiwadai.util.StringUtil;
+import me.reidj.takiwadai.util.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -109,7 +109,7 @@ public class AdminScene extends AbstractScene {
         if (Exceptions.fieldIsEmpty.check(idApplicationText)) {
             Exceptions.fieldIsEmpty.alert();
             return null;
-        } else if (!StringUtil.isNumber(idApplicationText)) {
+        } else if (!Utils.isNumber(idApplicationText)) {
             errorAlert("Неверный формат поля!", "");
             return null;
         }
