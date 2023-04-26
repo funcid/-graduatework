@@ -1,43 +1,43 @@
 package me.reidj.takiwadai.service;
 
+import me.reidj.takiwadai.util.Utils;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.Random;
 
+import static me.reidj.takiwadai.util.Utils.RESOURCES;
+
 public class MailSender {
 
-    // TODO Переехать в properties
-    private static final String FROM = "reidjjava@gmail.com";
-    private static final String HOST = "smtp.gmail.com";
-    private static final String PORT = "465";
-
-    private final Properties properties = System.getProperties();
+    private final Properties systemProperties = System.getProperties();
+    private final Properties properties = Utils.loadPropertyFile(RESOURCES + "mail.properties");
 
     public String send(String to, String name) {
-        properties.setProperty("mail.smtp.host", HOST);
-        properties.setProperty("mail.smtp.port", PORT);
-        properties.setProperty("mail.smtp.ssl.enable", "true");
-        properties.setProperty("mail.smtp.auth", "true");
+        systemProperties.setProperty("mail.smtp.host", properties.getProperty("mail.host"));
+        systemProperties.setProperty("mail.smtp.port", properties.getProperty("mail.port"));
+        systemProperties.setProperty("mail.smtp.ssl.enable", "true");
+        systemProperties.setProperty("mail.smtp.auth", "true");
 
         Session session = Session.getInstance(
-                properties,
+                systemProperties,
                 new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(FROM, "auwwmgbrsksgrrdb");
+                        return new PasswordAuthentication(properties.getProperty("mail.username"), properties.getProperty("mail.password"));
                     }
                 }
         );
         return generateMessage(to, session, name);
     }
 
-    private static String generateMessage(String to, Session session, String name) {
+    private String generateMessage(String to, Session session, String name) {
         String newPassword = passwordGenerator();
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(FROM));
+            message.setFrom(new InternetAddress(properties.getProperty("mail.username")));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Takiwadai | Восстановление пароля");
             message.setText("Здравствуйте " + name + "." +

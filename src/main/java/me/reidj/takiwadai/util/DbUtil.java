@@ -3,11 +3,10 @@ package me.reidj.takiwadai.util;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOError;
-import java.io.IOException;
 import java.util.Properties;
+
+import static me.reidj.takiwadai.util.Utils.RESOURCES;
 
 public class DbUtil {
 
@@ -34,8 +33,7 @@ public class DbUtil {
 
     static {
         try {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream("src/main/resources/database.properties"));
+            Properties properties = Utils.loadPropertyFile(RESOURCES + "database.properties");
 
             dataSource = new HikariDataSource();
             dataSource.setDriverClassName(properties.getProperty(DB_DRIVER_CLASS));
@@ -47,10 +45,8 @@ public class DbUtil {
             dataSource.setIdleTimeout(600000);
             dataSource.setMaximumPoolSize(250);
             dataSource.setMinimumIdle(3);
-        } catch (IOError | FileNotFoundException e) {
+        } catch (IOError e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
