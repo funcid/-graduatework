@@ -45,11 +45,15 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="88.0" layoutY="452.0" styleClass="forgetBtn" text="Нету аккаунта?" textFill="#a3a3a3" />
-            <Label layoutX="198.0" layoutY="452.0" onMouseClicked="#openRegistration" styleClass="register" text="Зарегистрироваться" textFill="#2c1a54" />
+            <Label layoutX="88.0" layoutY="435.0" styleClass="forgetBtn" text="Нету аккаунта?" textFill="#a3a3a3" />
+            <Label layoutX="198.0" layoutY="435.0" onMouseClicked="#openRegistration" styleClass="register" text="Зарегистрироваться" textFill="#2c1a54" />
             <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="339.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
-            <JFXCheckBox fx:id="saveData" checkedColor="#2c1a54" layoutX="132.0" layoutY="334.0" onMouseClicked="#onSaveData" text="Сохранить данные" unCheckedColor="#2c1a54" />
-            <Label layoutX="238.0" layoutY="429.0" styleClass="forgetBtn" text="Забыли пароль?" textFill="#0d0808" />
+            <JFXCheckBox fx:id="saveData" checkedColor="#2c1a54" layoutX="50.0" layoutY="334.0" onMouseClicked="#onSaveData" text="Сохранить данные" unCheckedColor="#2c1a54" />
+            <Label layoutX="235.0" layoutY="335.0" onMouseClicked="#onForgottenPassword" styleClass="forgetBtn" text="Забыли пароль?" textFill="#0d0808">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
     </children>

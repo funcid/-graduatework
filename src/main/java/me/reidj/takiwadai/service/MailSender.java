@@ -15,7 +15,7 @@ public class MailSender {
 
     private final Properties properties = System.getProperties();
 
-    public void send(String to) {
+    public String send(String to) {
         properties.setProperty("mail.smtp.host", HOST);
         properties.setProperty("mail.smtp.port", PORT);
         properties.setProperty("mail.smtp.ssl.enable", "true");
@@ -30,12 +30,12 @@ public class MailSender {
                     }
                 }
         );
-        generateMessage(to, session);
+        return generateMessage(to, session);
     }
 
-    private static void generateMessage(String to, Session session) {
+    private static String generateMessage(String to, Session session) {
+        String newPassword = passwordGenerator();
         try {
-            String newPassword = passwordGenerator();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(FROM));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -49,6 +49,7 @@ public class MailSender {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return newPassword;
     }
 
     private static String passwordGenerator() {

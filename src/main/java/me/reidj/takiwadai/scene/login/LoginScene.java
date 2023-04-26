@@ -75,7 +75,7 @@ public class LoginScene extends AbstractScene {
         }
 
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_USER);
+            PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_USER_BY_EMAIL_AND_PASSWORD);
 
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
@@ -115,9 +115,19 @@ public class LoginScene extends AbstractScene {
         App.getApp().getSettingsManager().onWrite(gson.toJson(emailText + ":" + passwordText).getBytes());
     }
 
+    @FXML
+    void onForgottenPassword() throws IOException {
+        openForgottenPasswordScene();
+    }
+
     private void openApplicationScene() throws IOException {
         childrenRemove();
         contentArea.getChildren().setAll(App.getApp().getApplicationScene().getParent());
+    }
+
+    private void openForgottenPasswordScene() throws IOException {
+        childrenRemove();
+        contentArea.getChildren().setAll(App.getApp().getForgottenPasswordScene().getParent());
     }
 
     private void openAdminScene() throws IOException {

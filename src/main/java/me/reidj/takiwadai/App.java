@@ -7,11 +7,11 @@ import me.reidj.takiwadai.config.FileManager;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.admin.AdminScene;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
+import me.reidj.takiwadai.scene.forgotten_password.ForgottenPasswordScene;
 import me.reidj.takiwadai.scene.log.LogScene;
 import me.reidj.takiwadai.scene.login.LoginScene;
 import me.reidj.takiwadai.scene.profile.ProfileScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
-import me.reidj.takiwadai.service.MailSender;
 import me.reidj.takiwadai.user.User;
 
 import java.io.IOException;
@@ -29,6 +29,7 @@ public class App extends Application {
     private LogScene logScene;
     private AdminScene adminScene;
     private ProfileScene profileScene;
+    private ForgottenPasswordScene forgottenPasswordScene;
 
     private FileManager settingsManager;
 
@@ -44,13 +45,12 @@ public class App extends Application {
         this.logScene = new LogScene(stage);
         this.adminScene = new AdminScene(stage);
         this.profileScene = new ProfileScene(stage);
+        this.forgottenPasswordScene = new ForgottenPasswordScene(stage);
 
         this.settingsManager = new FileManager();
         this.settingsManager.createFile();
 
         new Exceptions().init();
-
-        new MailSender().send("reidjjava@gmail.com");
 
         stage.setScene(new Scene(loginScene.getParent()));
         stage.show();
@@ -87,6 +87,14 @@ public class App extends Application {
 
     public FileManager getSettingsManager() {
         return settingsManager;
+    }
+
+    public ProfileScene getProfileScene() {
+        return profileScene;
+    }
+
+    public ForgottenPasswordScene getForgottenPasswordScene() {
+        return forgottenPasswordScene;
     }
 
     public void setUser(User user) {
