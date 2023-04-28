@@ -32,20 +32,8 @@ public abstract class AbstractScene extends AbstractVisualComponent {
 
     }
 
-    public String getFxmlPath() {
-        return fxmlPath;
-    }
-
     public Stage getStage() {
         return stage;
-    }
-
-    public void setFxmlPath(String fxmlPath) {
-        this.fxmlPath = fxmlPath;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public Scene getScene() {

@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import me.reidj.takiwadai.config.FileManager;
 import me.reidj.takiwadai.exception.Exceptions;
-import me.reidj.takiwadai.scene.admin.AdminScene;
+import me.reidj.takiwadai.scene.log.realization.AdminScene;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
 import me.reidj.takiwadai.scene.forgotten_password.ForgottenPasswordScene;
 import me.reidj.takiwadai.scene.log.LogScene;

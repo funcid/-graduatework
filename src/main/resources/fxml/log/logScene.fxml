@@ -2,7 +2,8 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -12,7 +13,14 @@
       <Label layoutX="66.0" layoutY="123.0" styleClass="application-name" text="Журнал" textFill="#545454" />
       <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="347.0" layoutY="10.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
       <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="338.0" layoutY="24.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
-      <TextArea fx:id="logOutput" editable="false" layoutX="70.0" layoutY="166.0" prefHeight="281.0" prefWidth="300.0" />
+      <TableView fx:id="logs" layoutX="16.0" layoutY="161.0" prefHeight="200.0" prefWidth="369.0">
+        <columns>
+          <TableColumn fx:id="dateCreation" prefWidth="116.0" text="Дата создания" />
+          <TableColumn fx:id="category" prefWidth="73.0" text="Категория" />
+            <TableColumn fx:id="description" prefWidth="100.0" text="Описание" />
+            <TableColumn fx:id="status" prefWidth="79.0" text="Статус" />
+        </columns>
+      </TableView>
    </children>
    <stylesheets>
       <URL value="@../../styles/index.css" />
