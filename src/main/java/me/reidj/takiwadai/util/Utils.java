@@ -17,6 +17,8 @@ public class Utils {
 
     public static final String RESOURCES = "src/main/resources/";
 
+    private static final int MAXIMUM_LINE_SIZE = 30;
+
     public static boolean isRegularExpressionCheck(String regex, String input) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -39,5 +41,23 @@ public class Utils {
             throw new RuntimeException(e);
         }
         return properties;
+    }
+
+    public static String wrapText(String text) {
+        StringBuilder wrappedText = new StringBuilder();
+        while (text.length() > 0) {
+            if (text.length() <= MAXIMUM_LINE_SIZE) {
+                wrappedText.append(text);
+                break;
+            } else {
+                int lastSpace = text.lastIndexOf(' ', MAXIMUM_LINE_SIZE);
+                if (lastSpace == -1) {
+                    lastSpace = MAXIMUM_LINE_SIZE;
+                }
+                wrappedText.append(text, 0, lastSpace).append("\n");
+                text = text.substring(lastSpace).trim();
+            }
+        }
+        return wrappedText.toString();
     }
 }

@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import static me.reidj.takiwadai.util.Utils.wrapText;
+
 public class LogScene extends AbstractScene {
 
     @FXML
@@ -54,7 +56,7 @@ public class LogScene extends AbstractScene {
                 logs.getItems().add(new Log(
                         resultSet.getString("date"),
                         resultSet.getString("category"),
-                        resultSet.getString("description"),
+                        wrapText(resultSet.getString("description")),
                         resultSet.getString("status")
                 ));
             }

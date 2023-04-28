@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Arrays;
 
+import static me.reidj.takiwadai.util.Utils.wrapText;
+
 public class AdminScene extends AbstractScene {
 
     @FXML
@@ -83,7 +85,7 @@ public class AdminScene extends AbstractScene {
                         resultSet.getString("name") + " " + resultSet.getString("surname") + " " + resultSet.getString("secondName"),
                         resultSet.getString("date"),
                         resultSet.getString("category"),
-                        resultSet.getString("description"),
+                        wrapText(resultSet.getString("description")),
                         resultSet.getString("status")
                 ));
             }
