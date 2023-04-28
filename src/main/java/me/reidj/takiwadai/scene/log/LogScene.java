@@ -40,7 +40,7 @@ public class LogScene extends AbstractScene {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         dateCreation.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));

@@ -11,17 +11,17 @@ public class FileManager {
     private static final Path PATH = Paths.get(new File(URL).toURI());
 
     public void createFile() throws IOException {
-        if (!isExists(PATH) && !isDir(PATH)) {
+        if (!isExists() && !isDir()) {
             Files.createFile(PATH);
         }
     }
 
-    public static boolean isExists(Path path) {
-        return Files.exists(path);
+    private static boolean isExists() {
+        return Files.exists(FileManager.PATH);
     }
 
-    public static boolean isDir(Path path) {
-        return Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS);
+    private static boolean isDir() {
+        return Files.isDirectory(FileManager.PATH, LinkOption.NOFOLLOW_LINKS);
     }
 
     public void onWrite(byte[] bytes) {

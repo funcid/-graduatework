@@ -54,7 +54,7 @@ public class RegistrationScene extends AbstractScene {
     }
 
     @FXML
-    void processRegistration() {
+    private void processRegistration() {
         String nameText = name.getText();
         String surnameText = surname.getText();
         String secondNameText = secondName.getText();

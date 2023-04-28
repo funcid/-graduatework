@@ -44,7 +44,7 @@ public class ProfileScene extends AbstractScene {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         User user = App.getApp().getUser();
         name.setText(user.name());
         surname.setText(user.surname());
@@ -54,7 +54,7 @@ public class ProfileScene extends AbstractScene {
     }
 
     @FXML
-    void onUpdate() {
+    private void onUpdate() {
         String nameText = name.getText();
         String surnameText = surname.getText();
         String secondNameText = secondName.getText();
@@ -93,7 +93,7 @@ public class ProfileScene extends AbstractScene {
     }
 
     @FXML
-    void goApplications() throws IOException {
+    private void goApplications() throws IOException {
         openProfile();
     }
 

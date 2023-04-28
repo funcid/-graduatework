@@ -25,7 +25,7 @@ public class ForgottenPasswordScene extends AbstractScene {
     }
 
     @FXML
-    void recoveryProcess() {
+    private void recoveryProcess() {
         String emailText = email.getText();
         if (Exceptions.fieldIsEmpty.check(emailText)) {
             Exceptions.fieldIsEmpty.alert();
@@ -58,6 +58,5 @@ public class ForgottenPasswordScene extends AbstractScene {
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
-
     }
 }

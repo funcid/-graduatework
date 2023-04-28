@@ -45,7 +45,7 @@ public class LoginScene extends AbstractScene {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         String read = new String(App.getApp().getSettingsManager().onRead());
         String data = gson.fromJson(read, String.class);
         if (data != null) {
@@ -57,7 +57,7 @@ public class LoginScene extends AbstractScene {
     }
 
     @FXML
-    void onLoginProcess() {
+    private void onLoginProcess() {
         String emailText = email.getText();
         String passwordText = password.getText();
         tryLogin(emailText, passwordText);
@@ -107,7 +107,7 @@ public class LoginScene extends AbstractScene {
     }
 
     @FXML
-    void onSaveData() {
+    private void onSaveData() {
         String emailText = email.getText();
         String passwordText = password.getText();
         if (Exceptions.fieldIsEmpty.check(emailText, passwordText)) {
@@ -117,8 +117,15 @@ public class LoginScene extends AbstractScene {
     }
 
     @FXML
-    void onForgottenPassword() throws IOException {
-        openForgottenPasswordScene();
+    private void onForgottenPassword() throws IOException {
+        childrenRemove();
+        contentArea.getChildren().setAll(App.getApp().getForgottenPasswordScene().getParent());
+    }
+
+    @FXML
+    private void openRegistration() throws IOException {
+        childrenRemove();
+        contentArea.getChildren().setAll(App.getApp().getRegistrationScene().getParent());
     }
 
     private void openProfile() throws IOException {
@@ -126,20 +133,9 @@ public class LoginScene extends AbstractScene {
         contentArea.getChildren().setAll(App.getApp().getProfileScene().getParent());
     }
 
-    private void openForgottenPasswordScene() throws IOException {
-        childrenRemove();
-        contentArea.getChildren().setAll(App.getApp().getForgottenPasswordScene().getParent());
-    }
-
     private void openAdminScene() throws IOException {
         childrenRemove();
         contentArea.getChildren().setAll(App.getApp().getAdminScene().getParent());
-    }
-
-    @FXML
-    public void openRegistration() throws IOException {
-        childrenRemove();
-        contentArea.getChildren().setAll(App.getApp().getRegistrationScene().getParent());
     }
 
     private void childrenRemove() {

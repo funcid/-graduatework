@@ -23,11 +23,11 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
                 </ImageView>
-                <Label styleClass="welcome" text="Добро Пожаловать в" textFill="WHITE">
+                <Label styleClass="description-text" text="Добро Пожаловать в" textFill="WHITE">
                <effect>
                   <DropShadow />
                </effect></Label>
-                <Label styleClass="application-name" text="Takiwadai" textFill="WHITE">
+                <Label styleClass="title-text" text="Takiwadai" textFill="WHITE">
                 </Label>
             </children>
         </VBox>
@@ -35,9 +35,9 @@
             <children>
                 <ImageView fitHeight="73.0" fitWidth="200.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="full-logo" />
-                <Label layoutX="36.0" layoutY="93.0" styleClass="application-name" text="Добро пожаловать," textFill="#545454">
+                <Label layoutX="36.0" layoutY="93.0" styleClass="title-text" text="Добро пожаловать," textFill="#545454">
                 </Label>
-                <Label layoutX="36.0" layoutY="124.0" styleClass="welcome" text="Войдите, чтобы продолжить" textFill="#a3a3a3" />
+                <Label layoutX="36.0" layoutY="124.0" styleClass="description-text" text="Войдите, чтобы продолжить" textFill="#a3a3a3" />
                 <PasswordField fx:id="password" layoutX="50.0" layoutY="278.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Пароль" />
                 <TextField fx:id="email" layoutX="50.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Электронный адрес" styleClass="text-field" />
             <Button layoutX="50.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onLoginProcess" prefHeight="50.0" prefWidth="300.0" styleClass="loginBtn" text="Авторизоваться">

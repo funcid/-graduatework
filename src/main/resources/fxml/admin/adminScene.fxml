@@ -13,7 +13,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.reidj.takiwadai.scene.log.realization.AdminScene">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" styleClass="full-logo" />
-      <Label layoutX="66.0" layoutY="123.0" styleClass="application-name" text="Заявки" textFill="#545454" />
+      <Label layoutX="66.0" layoutY="123.0" styleClass="title-text" text="Заявки" textFill="#545454" />
       <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="347.0" layoutY="10.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
       <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="307.0" layoutY="24.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
       <Button fx:id="updateStatusButton" layoutX="50.0" layoutY="422.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="loginBtn" text="Обновить статус">

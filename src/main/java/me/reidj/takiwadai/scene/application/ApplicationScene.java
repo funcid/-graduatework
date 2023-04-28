@@ -63,7 +63,7 @@ public class ApplicationScene extends AbstractScene {
     }
 
     @FXML
-    void sendProcess() {
+    private void sendProcess() {
         String descriptionText = description.getText();
         String categoryValue = category.getValue();
         String customCategoryValue = customCategory.getText();
@@ -95,7 +95,7 @@ public class ApplicationScene extends AbstractScene {
     }
 
     @FXML
-    void openLog() throws IOException {
+    private void openLog() throws IOException {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(App.getApp().getLogScene().getParent());
     }
