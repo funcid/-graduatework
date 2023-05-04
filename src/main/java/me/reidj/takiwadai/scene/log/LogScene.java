@@ -5,6 +5,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.util.DbUtil;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 
 import static me.reidj.takiwadai.util.Utils.wrapText;
 
+@NoArgsConstructor
 public class LogScene extends AbstractScene {
 
     @FXML
@@ -34,9 +36,6 @@ public class LogScene extends AbstractScene {
 
     public LogScene(Stage stage) {
         super("/fxml/log/logScene.fxml", stage);
-    }
-
-    public LogScene() {
     }
 
     @FXML

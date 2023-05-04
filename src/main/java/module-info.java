@@ -8,6 +8,7 @@ module me.reidj.takiwadai {
     requires com.google.gson;
     requires java.mail;
     requires static activation;
+    requires static lombok;
 
     opens me.reidj.takiwadai to javafx.fxml;
     exports me.reidj.takiwadai;

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
@@ -17,6 +18,7 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@NoArgsConstructor
 public class RegistrationScene extends AbstractScene {
 
     @FXML
@@ -38,10 +40,6 @@ public class RegistrationScene extends AbstractScene {
     private TextField surname;
 
     private Timer timer;
-
-    public RegistrationScene() {
-
-    }
 
     public RegistrationScene(Stage stage) {
         super("/fxml/registration/registrationScene.fxml", stage);

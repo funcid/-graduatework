@@ -3,12 +3,14 @@ package me.reidj.takiwadai;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import me.reidj.takiwadai.config.FileManager;
 import me.reidj.takiwadai.exception.Exceptions;
-import me.reidj.takiwadai.scene.log.realization.AdminScene;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
 import me.reidj.takiwadai.scene.forgotten_password.ForgottenPasswordScene;
 import me.reidj.takiwadai.scene.log.LogScene;
+import me.reidj.takiwadai.scene.log.realization.AdminScene;
 import me.reidj.takiwadai.scene.login.LoginScene;
 import me.reidj.takiwadai.scene.profile.ProfileScene;
 import me.reidj.takiwadai.scene.registration.RegistrationScene;
@@ -16,8 +18,10 @@ import me.reidj.takiwadai.user.User;
 
 import java.io.IOException;
 
+@Getter
 public class App extends Application {
 
+    @Getter
     private static App app;
 
     private LoginScene loginScene;
@@ -33,6 +37,7 @@ public class App extends Application {
 
     private FileManager settingsManager;
 
+    @Setter
     private User user;
 
     @Override
@@ -58,50 +63,5 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    public static App getApp() {
-        return app;
-    }
-
-    public ApplicationScene getApplicationScene() {
-        return applicationScene;
-    }
-
-    public LoginScene getLoginScene() {
-        return loginScene;
-    }
-
-    public RegistrationScene getRegistrationScene() {
-        return registrationScene;
-    }
-
-    public LogScene getLogScene() {
-        return logScene;
-    }
-
-
-    public AdminScene getAdminScene() {
-        return adminScene;
-    }
-
-    public FileManager getSettingsManager() {
-        return settingsManager;
-    }
-
-    public ProfileScene getProfileScene() {
-        return profileScene;
-    }
-
-    public ForgottenPasswordScene getForgottenPasswordScene() {
-        return forgottenPasswordScene;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

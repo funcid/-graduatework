@@ -5,19 +5,20 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+@NoArgsConstructor
+@Getter
 public abstract class AbstractScene extends AbstractVisualComponent {
-
-    private String fxmlPath;
 
     private Stage stage;
 
     public AbstractScene(String fxmlPath, Stage stage) {
         super(fxmlPath);
-        this.fxmlPath = fxmlPath;
         this.stage = stage;
         stage.setTitle("Takiwadai");
         stage.initStyle(StageStyle.UNDECORATED);
@@ -26,14 +27,6 @@ public abstract class AbstractScene extends AbstractVisualComponent {
             stage.getIcons().add(new Image(inputStream));
         }
         stage.setResizable(false);
-    }
-
-    public AbstractScene() {
-
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
     public Scene getScene() {

@@ -5,6 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+@NoArgsConstructor
 public class ProfileScene extends AbstractScene {
 
     @FXML
@@ -38,9 +40,6 @@ public class ProfileScene extends AbstractScene {
 
     public ProfileScene(Stage stage) {
         super("/fxml/profile/profileScene.fxml", stage);
-    }
-
-    public ProfileScene() {
     }
 
     @FXML

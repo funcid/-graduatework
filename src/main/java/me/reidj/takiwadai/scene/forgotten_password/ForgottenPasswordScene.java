@@ -3,6 +3,7 @@ package me.reidj.takiwadai.scene.forgotten_password;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.service.MailSender;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+@NoArgsConstructor
 public class ForgottenPasswordScene extends AbstractScene {
 
     @FXML
@@ -19,9 +21,6 @@ public class ForgottenPasswordScene extends AbstractScene {
 
     public ForgottenPasswordScene(Stage stage) {
         super("/fxml/forgotten_password/forgottenPasswordScene.fxml", stage);
-    }
-
-    public ForgottenPasswordScene() {
     }
 
     @FXML

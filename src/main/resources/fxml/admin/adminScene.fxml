@@ -15,7 +15,7 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" styleClass="full-logo" />
       <Label layoutX="66.0" layoutY="123.0" styleClass="title-text" text="Заявки" textFill="#545454" />
       <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="347.0" layoutY="10.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" styleClass="exit-button" />
-      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="307.0" layoutY="24.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
+      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="338.0" layoutY="24.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="move-button" />
       <Button fx:id="updateStatusButton" layoutX="50.0" layoutY="422.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="loginBtn" text="Обновить статус">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -26,11 +26,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="22.0" fitWidth="20.0" layoutX="341.0" layoutY="32.0" onMouseClicked="#backLoginScreen" pickOnBounds="true" preserveRatio="true" styleClass="word-button" />
       <JFXComboBox fx:id="statuses" focusColor="#3f2679" layoutX="50.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" unFocusColor="#2c1a54" />
       <TableView fx:id="logs" layoutX="11.0" layoutY="162.0" prefHeight="200.0" prefWidth="378.0">
         <columns>
-          <TableColumn fx:id="applicationId" prefWidth="52.0" text="Id заявки" />
+          <TableColumn fx:id="applicationId" prefWidth="52.0" text="Код заявки" />
           <TableColumn fx:id="creator" prefWidth="98.0" text="Создал" />
             <TableColumn fx:id="dateCreation" prefWidth="75.0" text="Дата создания" />
             <TableColumn fx:id="category" prefWidth="75.0" text="Категория" />

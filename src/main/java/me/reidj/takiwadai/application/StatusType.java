@@ -1,5 +1,8 @@
 package me.reidj.takiwadai.application;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum StatusType {
     SEND("Отправлено"),
     IN_WORK("В работе"),
@@ -8,10 +11,6 @@ public enum StatusType {
     ;
 
     private final String title;
-
-    StatusType(String title) {
-        this.title = title;
-    }
 
     public String getTitle() {
         return title;

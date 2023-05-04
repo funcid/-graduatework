@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.application.StatusType;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.scene.log.Log;
@@ -16,9 +17,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static me.reidj.takiwadai.util.Utils.wrapText;
 
+@NoArgsConstructor
 public class AdminScene extends AbstractScene {
 
     @FXML
@@ -55,9 +58,6 @@ public class AdminScene extends AbstractScene {
         super("/fxml/admin/adminScene.fxml", stage);
     }
 
-    public AdminScene() {
-    }
-
     @FXML
     public void initialize() {
         applicationId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -68,7 +68,7 @@ public class AdminScene extends AbstractScene {
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         statuses.setValue(StatusType.IN_WORK.getTitle());
-        statuses.getItems().addAll(Arrays.stream(StatusType.values()).map(StatusType::getTitle).toList());
+        statuses.getItems().addAll(Arrays.stream(StatusType.values()).map(StatusType::getTitle).collect(Collectors.toList()));
 
         fillingLogs();
         selectionColumn();

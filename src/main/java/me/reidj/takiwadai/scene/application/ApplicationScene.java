@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.application.StatusType;
 import me.reidj.takiwadai.exception.Exceptions;
@@ -20,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 public class ApplicationScene extends AbstractScene {
 
     @FXML
@@ -57,9 +59,6 @@ public class ApplicationScene extends AbstractScene {
             description.setLayoutY(has ? 300 : 256);
             send.setLayoutY(has ? 510 : 481);
         });
-    }
-
-    public ApplicationScene() {
     }
 
     @FXML
