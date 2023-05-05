@@ -6,27 +6,26 @@ import java.nio.file.*;
 
 public class FileManager {
 
-    private static final String URL = "settings.json";
+    private static Path path;
 
-    private static final Path PATH = Paths.get(new File(URL).toURI());
-
-    public void createFile() throws IOException {
-        if (!isExists() && !isDir()) {
-            Files.createFile(PATH);
+    public void createFile(String url) throws IOException {
+        path = Paths.get(new File(url).toURI());
+        if (!isExists() && !isDir(path)) {
+            Files.createFile(path);
         }
     }
 
     private static boolean isExists() {
-        return Files.exists(FileManager.PATH);
+        return Files.exists(path);
     }
 
-    private static boolean isDir() {
-        return Files.isDirectory(FileManager.PATH, LinkOption.NOFOLLOW_LINKS);
+    private static boolean isDir(Path path) {
+        return Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS);
     }
 
     public void onWrite(byte[] bytes) {
         try {
-            Files.write(PATH, bytes, StandardOpenOption.WRITE);
+            Files.write(path, bytes, StandardOpenOption.WRITE);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +33,7 @@ public class FileManager {
 
     public byte[] onRead() {
         try {
-            return Files.readAllBytes(PATH);
+            return Files.readAllBytes(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

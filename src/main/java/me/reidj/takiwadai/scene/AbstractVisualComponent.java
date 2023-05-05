@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
 
 import java.io.IOException;
 
-@NoArgsConstructor
 public abstract class AbstractVisualComponent {
 
     private String fxmlPath;
@@ -20,6 +18,9 @@ public abstract class AbstractVisualComponent {
 
     public AbstractVisualComponent(String fxmlPath) {
         this.fxmlPath = fxmlPath;
+    }
+
+    public AbstractVisualComponent() {
     }
 
     public void errorAlert(String contextText, String headerText) {

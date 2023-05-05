@@ -35,10 +35,12 @@ public class App extends Application {
     private ProfileScene profileScene;
     private ForgottenPasswordScene forgottenPasswordScene;
 
-    private FileManager settingsManager;
+    private FileManager fileManager;
 
     @Setter
     private User user;
+
+    private static final String FILE_NAME = "settings.json";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,8 +54,8 @@ public class App extends Application {
         this.profileScene = new ProfileScene(stage);
         this.forgottenPasswordScene = new ForgottenPasswordScene(stage);
 
-        this.settingsManager = new FileManager();
-        this.settingsManager.createFile();
+        this.fileManager = new FileManager();
+        this.fileManager.createFile(FILE_NAME);
 
         new Exceptions().init();
 

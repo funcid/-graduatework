@@ -8,21 +8,32 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
+import lombok.val;
+import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.application.StatusType;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.scene.log.Log;
 import me.reidj.takiwadai.util.DbUtil;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static me.reidj.takiwadai.util.Utils.wrapText;
 
 @NoArgsConstructor
 public class AdminScene extends AbstractScene {
+
+    private static final String FILE_NAME = "Отчёт от ";
+
+    private static final String LINE = "--------------------------------------";
+
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
 
     @FXML
     private TableColumn<Log, String> applicationId;
@@ -68,7 +79,7 @@ public class AdminScene extends AbstractScene {
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         statuses.setValue(StatusType.IN_WORK.getTitle());
-        statuses.getItems().addAll(Arrays.stream(StatusType.values()).map(StatusType::getTitle).collect(Collectors.toList()));
+        statuses.getItems().addAll(Arrays.stream(StatusType.values()).map(StatusType::getTitle).toList());
 
         fillingLogs();
         selectionColumn();
@@ -76,9 +87,7 @@ public class AdminScene extends AbstractScene {
 
     private void fillingLogs() {
         logs.getItems().clear();
-        try (Connection connection = DbUtil.getDataSource().getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_APPLICATIONS);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (val resultSet = getAllApplications()) {
             while (resultSet.next()) {
                 logs.getItems().add(new Log(
                         resultSet.getInt("id"),
@@ -89,9 +98,15 @@ public class AdminScene extends AbstractScene {
                         resultSet.getString("status")
                 ));
             }
-        } catch (java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private ResultSet getAllApplications() throws SQLException {
+        Connection connection = DbUtil.getDataSource().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_APPLICATIONS);
+        return preparedStatement.executeQuery();
     }
 
     private void selectionColumn() {
@@ -132,5 +147,48 @@ public class AdminScene extends AbstractScene {
                 e.printStackTrace();
             }
         });
+    }
+
+    private final StringBuilder stringBuilder = new StringBuilder();
+
+    @FXML
+    private void createWordDocument() throws IOException {
+        App.getApp().getFileManager().createFile(FILE_NAME + dateTimeFormatter.format(LocalDateTime.now()) + ".doc");
+        try (val resultSet = getAllApplications()) {
+            while (resultSet.next()) {
+                stringBuilder
+                        .append("Отчёт по присланным заявкам о технических неисправностях.")
+                        .append("\n")
+                        .append(LINE)
+                        .append("\n")
+                        .append("Код заявки: ")
+                        .append(resultSet.getInt("id"))
+                        .append("\n")
+                        .append("Имя: ")
+                        .append(resultSet.getString("name"))
+                        .append("\n")
+                        .append("Фамилия: ")
+                        .append(resultSet.getString("surname"))
+                        .append("\n")
+                        .append("Отчество: ")
+                        .append(resultSet.getString("secondName"))
+                        .append("\n")
+                        .append("Дата создания: ")
+                        .append(resultSet.getString("date"))
+                        .append("\n")
+                        .append("Категория: ")
+                        .append(resultSet.getString("category"))
+                        .append("\n")
+                        .append("Описание: ")
+                        .append(wrapText(resultSet.getString("description")))
+                        .append("\n")
+                        .append("Статус: ")
+                        .append(resultSet.getString("status"))
+                        .append("\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        App.getApp().getFileManager().onWrite(stringBuilder.toString().getBytes());
     }
 }

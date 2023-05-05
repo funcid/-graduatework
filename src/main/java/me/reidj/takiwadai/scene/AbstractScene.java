@@ -5,14 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-@NoArgsConstructor
-@Getter
 public abstract class AbstractScene extends AbstractVisualComponent {
 
     private Stage stage;
@@ -29,11 +25,18 @@ public abstract class AbstractScene extends AbstractVisualComponent {
         stage.setResizable(false);
     }
 
+    public AbstractScene() {
+    }
+
     public Scene getScene() {
         return getStage().getScene();
     }
 
     public Parent getParent() throws IOException {
         return getFxmlRoot();
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

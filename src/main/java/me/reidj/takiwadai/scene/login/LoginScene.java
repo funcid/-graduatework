@@ -44,7 +44,7 @@ public class LoginScene extends AbstractScene {
 
     @FXML
     private void initialize() {
-        String read = new String(App.getApp().getSettingsManager().onRead());
+        String read = new String(App.getApp().getFileManager().onRead());
         String data = gson.fromJson(read, String.class);
         if (data != null) {
             String[] pair = data.split(":");
@@ -111,7 +111,7 @@ public class LoginScene extends AbstractScene {
         if (Exceptions.fieldIsEmpty.check(emailText, passwordText)) {
             return;
         }
-        App.getApp().getSettingsManager().onWrite(gson.toJson(emailText + ":" + passwordText).getBytes());
+        App.getApp().getFileManager().onWrite(gson.toJson(emailText + ":" + passwordText).getBytes());
     }
 
     @FXML
