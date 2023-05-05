@@ -1,15 +1,18 @@
 package me.reidj.takiwadai.exception;
 
-import me.reidj.takiwadai.App;
+import lombok.Getter;
 
-public class PasswordShort {
+@Getter
+public class PasswordShort implements Solid {
 
-    public boolean check(String password) {
-        return password.length() <= 6;
-    }
+	private final String[] message = new String[]{
+			"Пожалуйста, проверьте правильность введённого пароля!",
+			"Ваш пароль должен быть длиннее 6 символов!"
+	};
 
-    public void alert() {
-        App.getApp().getRegistrationScene().errorAlert("Пожалуйста, проверьте правильность введённого пароля!",
-                "Ваш пароль должен быть длиннее 6 символов!");
-    }
+	@Override
+	public boolean check(String... strings) {
+		return strings[0].length() <= 6;
+	}
+
 }

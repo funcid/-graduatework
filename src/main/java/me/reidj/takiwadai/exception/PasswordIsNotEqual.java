@@ -1,15 +1,18 @@
 package me.reidj.takiwadai.exception;
 
-import me.reidj.takiwadai.App;
+import lombok.Getter;
 
-public class PasswordIsNotEqual {
+@Getter
+public class PasswordIsNotEqual implements Solid {
 
-    public boolean check(String password, String confirmPassword) {
-        return !password.equals(confirmPassword);
-    }
+	private final String[] message = new String[]{
+			"Пожалуйста, проверьте правильность введённого пароля!",
+			"Ваши пароли не совпадают!"
+	};
 
-    public void alert() {
-        App.getApp().getRegistrationScene().errorAlert("Пожалуйста, проверьте правильность введённого пароля!",
-                "Ваши пароли не совпадают!");
-    }
+	@Override
+	public boolean check(String... strings) {
+		return !strings[0].equals(strings[1]);
+	}
+
 }

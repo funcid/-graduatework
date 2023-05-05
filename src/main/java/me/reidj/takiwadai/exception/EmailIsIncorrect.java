@@ -1,16 +1,19 @@
 package me.reidj.takiwadai.exception;
 
-import me.reidj.takiwadai.App;
+import lombok.Getter;
 import me.reidj.takiwadai.util.Utils;
 
-public class EmailIsIncorrect {
+@Getter
+public class EmailIsIncorrect implements Solid {
 
-    public boolean check(String email) {
-        return Utils.isRegularExpressionCheck(Utils.EMAIL_REGEX, email);
-    }
+	private final String[] message = new String[]{
+			"Пожалуйста, проверьте правильность введённой почты",
+			"Ваш формат почты неверен!"
+	};
 
-    public void alert() {
-        App.getApp().getRegistrationScene().errorAlert("Пожалуйста, проверьте правильность введённой почты",
-                "Ваш формат почты неверен!");
-    }
+	@Override
+	public boolean check(String... strings) {
+		return Utils.isRegularExpressionCheck(Utils.EMAIL_REGEX, strings[0]);
+	}
+
 }

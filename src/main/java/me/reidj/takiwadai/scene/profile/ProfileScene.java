@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
-import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.exception.Errors;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.User;
 import me.reidj.takiwadai.util.DbUtil;
@@ -60,19 +60,14 @@ public class ProfileScene extends AbstractScene {
         String passwordText = password.getText();
         String confirmPasswordText = confirmPassword.getText();
 
-        if (Exceptions.fieldIsEmpty.check(nameText, surnameText, secondNameText, passwordText, confirmPasswordText)) {
-            Exceptions.fieldIsEmpty.alert();
+        if (Errors.FIELD_EMPTY.check(nameText, surnameText, secondNameText, passwordText, confirmPasswordText))
             return;
-        } else if (Exceptions.passwordIsNotEqual.check(passwordText, confirmPasswordText)) {
-            Exceptions.passwordIsNotEqual.alert();
+        if (Errors.PASSWORD.check(passwordText, confirmPasswordText))
             return;
-        } else if (Exceptions.symbolIsIncorrect.check(nameText, surnameText, secondNameText)) {
-            Exceptions.symbolIsIncorrect.alert();
+        if (Errors.INCORRECT_SYMBOL.check(nameText, surnameText, secondNameText))
             return;
-        } else if (Exceptions.passwordShort.check(passwordText)) {
-            Exceptions.passwordShort.alert();
+        if (Errors.PASSWORD_IS_SHORT.check(passwordText))
             return;
-        }
 
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.UPDATE_USER);

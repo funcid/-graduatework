@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
 import me.reidj.takiwadai.application.StatusType;
-import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.exception.Errors;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.User;
 import me.reidj.takiwadai.util.DbUtil;
@@ -68,8 +68,7 @@ public class ApplicationScene extends AbstractScene {
         String customCategoryValue = customCategory.getText();
         String category = categoryValue.contains("Своё") ? customCategoryValue : categoryValue;
 
-        if (Exceptions.fieldIsEmpty.check(descriptionText, category)) {
-            Exceptions.fieldIsEmpty.alert();
+        if (Errors.FIELD_EMPTY.check(descriptionText, category)) {
             return;
         }
 

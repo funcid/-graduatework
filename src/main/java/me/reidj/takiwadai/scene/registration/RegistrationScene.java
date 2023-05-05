@@ -5,7 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
-import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.exception.Errors;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 import me.reidj.takiwadai.util.DbUtil;
@@ -60,22 +60,16 @@ public class RegistrationScene extends AbstractScene {
         String passwordText = password.getText();
         String confirmPasswordText = confirmPassword.getText();
 
-        if (Exceptions.emailIsIncorrect.check(emailText)) {
-            Exceptions.emailIsIncorrect.alert();
+        if (Errors.EMAIL.check(emailText))
             return;
-        } else if (Exceptions.fieldIsEmpty.check(nameText, surnameText, secondNameText, emailText, passwordText, confirmPasswordText)) {
-            Exceptions.fieldIsEmpty.alert();
+        if (Errors.FIELD_EMPTY.check(nameText, surnameText, secondNameText, emailText, passwordText, confirmPasswordText))
             return;
-        } else if (Exceptions.passwordShort.check(passwordText)) {
-            Exceptions.passwordShort.alert();
+        if (Errors.PASSWORD_IS_SHORT.check(passwordText))
             return;
-        } else if (Exceptions.symbolIsIncorrect.check(nameText, surnameText, secondNameText)) {
-            Exceptions.symbolIsIncorrect.alert();
+        if (Errors.INCORRECT_SYMBOL.check(nameText, surnameText, secondNameText))
             return;
-        } else if (Exceptions.passwordIsNotEqual.check(passwordText, confirmPasswordText)) {
-            Exceptions.passwordIsNotEqual.alert();
+        if (Errors.PASSWORD.check(passwordText, confirmPasswordText))
             return;
-        }
 
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             Statement statement = connection.createStatement();

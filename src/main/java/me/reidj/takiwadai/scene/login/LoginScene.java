@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import me.reidj.takiwadai.App;
-import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.exception.Errors;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.user.RoleType;
 import me.reidj.takiwadai.user.User;
@@ -62,16 +62,14 @@ public class LoginScene extends AbstractScene {
     }
 
     private void tryLogin(String email, String password) {
-        if (Exceptions.fieldIsEmpty.check(email, password)) {
-            Exceptions.fieldIsEmpty.alert();
+
+        if (Errors.FIELD_EMPTY.check(email, password))
             return;
-        } else if (Exceptions.emailIsIncorrect.check(email)) {
-            Exceptions.emailIsIncorrect.alert();
+        if (Errors.EMAIL.check(email))
             return;
-        } else if (Exceptions.passwordShort.check(password)) {
-            Exceptions.passwordShort.alert();
+        if (Errors.PASSWORD_IS_SHORT.check(password))
             return;
-        }
+
 
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DbUtil.SELECT_USER_BY_EMAIL_AND_PASSWORD);
@@ -108,9 +106,10 @@ public class LoginScene extends AbstractScene {
     private void onSaveData() {
         String emailText = email.getText();
         String passwordText = password.getText();
-        if (Exceptions.fieldIsEmpty.check(emailText, passwordText)) {
+
+        if (Errors.FIELD_EMPTY.check(emailText, passwordText))
             return;
-        }
+
         App.getApp().getFileManager().onWrite(gson.toJson(emailText + ":" + passwordText).getBytes());
     }
 

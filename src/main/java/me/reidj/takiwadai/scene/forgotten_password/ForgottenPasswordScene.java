@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
-import me.reidj.takiwadai.exception.Exceptions;
+import me.reidj.takiwadai.exception.Errors;
 import me.reidj.takiwadai.scene.AbstractScene;
 import me.reidj.takiwadai.service.MailSender;
 import me.reidj.takiwadai.util.DbUtil;
@@ -25,14 +25,14 @@ public class ForgottenPasswordScene extends AbstractScene {
 
     @FXML
     private void recoveryProcess() {
+
         String emailText = email.getText();
-        if (Exceptions.fieldIsEmpty.check(emailText)) {
-            Exceptions.fieldIsEmpty.alert();
+
+        if (Errors.FIELD_EMPTY.check(emailText))
             return;
-        } else if (Exceptions.emailIsIncorrect.check(emailText)) {
-            Exceptions.emailIsIncorrect.alert();
+        if (Errors.EMAIL.check(emailText))
             return;
-        }
+
 
         try (Connection connection = DbUtil.getDataSource().getConnection()) {
             PreparedStatement selectUser = connection.prepareStatement(DbUtil.SELECT_USER_BY_EMAIL);

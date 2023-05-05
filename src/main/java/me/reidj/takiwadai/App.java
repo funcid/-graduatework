@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import me.reidj.takiwadai.config.FileManager;
-import me.reidj.takiwadai.exception.Exceptions;
 import me.reidj.takiwadai.scene.application.ApplicationScene;
 import me.reidj.takiwadai.scene.forgotten_password.ForgottenPasswordScene;
 import me.reidj.takiwadai.scene.log.LogScene;
@@ -56,8 +55,6 @@ public class App extends Application {
 
         this.fileManager = new FileManager();
         this.fileManager.createFile(FILE_NAME);
-
-        new Exceptions().init();
 
         stage.setScene(new Scene(loginScene.getParent()));
         stage.show();
